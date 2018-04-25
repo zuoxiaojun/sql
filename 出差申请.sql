@@ -1,0 +1,1 @@
+select * from  GCL_EHR_CUX_HR2FIN_TMGF where VBILLNO='0000046832'
