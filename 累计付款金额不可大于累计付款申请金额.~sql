@@ -1,13 +1,15 @@
---ç´¯è®¡ä»˜æ¬¾é‡‘é¢ä¸å¯å¤§äºç´¯è®¡ä»˜æ¬¾ç”³è¯·é‡‘é¢
-select  pk_apply  from  cmp_apply where vbillno ='SS17121792';--1001D1100000007WFCA5
+--ÀÛ¼Æ¸¶¿î½ğ¶î²»¿É´óÓÚÀÛ¼Æ¸¶¿îÉêÇë½ğ¶î£¨Êı¾İ»ØĞ´ÎÊÌâ£©
+--¸¶¿îÉêÇëµ¥±íÌå
+--¸¶¿î¼Æ»®»ØĞ´
+select  pk_apply  from  cmp_apply where vbillno ='SS18020175'--1001D1100000009G5D7T
 
 select olcapplymny, glcapplymny, olcorigapplymny, origapplymny
   from cmp_apply_b
- where pk_apply = '1001D1100000007WFCA5'
+ where pk_apply = '1001D1100000009G5D7T'
    for update;
 
 select naccumpayappmny, naccumpayapporgmny
   from ct_payplan
  where pk_ct_pu = (select pk_ct_pu
                      from ct_pu
-                    where vbillcode = 'å…±äº«ä¸­å¿ƒ2017å¹´2-11æœˆæœåŠ¡è´¹') for update
+                    where vbillcode = 'GCL/XMUB-CG-2018-0037ºÅ') for update

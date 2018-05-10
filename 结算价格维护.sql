@@ -1,6 +1,6 @@
---å†…éƒ¨ç»“ç®—æ¸…å•ï¼Œç»“ç®—ä»·æ ¼ç»´æŠ¤é”™è¯¯
---ä¿®æ­£ä¸Šä¸‹æ¸¸ç»“ç®—è´¢åŠ¡ç»„ç»‡å’Œæˆæœ¬åŸŸ
-select cbillid from to_settlelist where vbillcode = '5F20180130122'; --1001D1100000008RVSFS
+--ÄÚ²¿½áËãÇåµ¥£¬½áËã¼Û¸ñÎ¬»¤´íÎó
+--ĞŞÕıÉÏÏÂÓÎ½áËã²ÆÎñ×éÖ¯ºÍ³É±¾Óò
+select cbillid,corigcurrencyid from to_settlelist where vbillcode = '5F20180510013' for update; --1001D110000000ADKCH9
 select crowno,
        cupcostregionid,
        cupfinanceorgid,
@@ -9,9 +9,10 @@ select crowno,
        cdownfinanceorgid,
        cdownfinanceorgvid,
        norigtaxprice,
-       ccurrencyid                              --1002Z0100000000001K8 ç¾å…ƒ
+       nexchangerate,                        --»ãÂÊ
+       ccurrencyid                              --1002Z0100000000001K8 ÃÀÔª
   from to_settlelist_bb
- where cbillid = '1001D1100000008TQVFX'
+ where cbillid = '1001D110000000ADKCH9'
  order by CCURRENCYID  for update
 
 

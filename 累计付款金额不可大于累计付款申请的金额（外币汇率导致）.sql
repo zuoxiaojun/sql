@@ -1,6 +1,14 @@
---ç´¯è®¡ä»˜æ¬¾é‡‘é¢ä¸å¯å¤§äºç´¯è®¡ä»˜æ¬¾ç”³è¯·çš„é‡‘é¢ï¼ˆå¤–å¸æ±‡ç‡å¯¼è‡´ï¼‰
---ä»˜æ¬¾ç”³è¯·æ±‡ç‡å¤§äºåˆåŒæ±‡ç‡
-select busistatus, vbillstatus
+--ÀÛ¼Æ¸¶¿î½ğ¶î²»¿É´óÓÚÀÛ¼Æ¸¶¿îÉêÇëµÄ½ğ¶î£¨Íâ±Ò»ãÂÊµ¼ÖÂ£©
+--¸¶¿îÉêÇë»ãÂÊ´óÓÚºÏÍ¬»ãÂÊ
+--´¦Àí¹ı³Ì£¬½«µ¥¾İ¸Ä³É×ÔÓÉÌ¬£¬ĞŞ¸ÄºÃ»ãÂÊºóÔÙ½«µ¥¾İ×´Ì¬¸Ä»ØÀ´£¨±íÍ·±íÌå¶¼Òª£©
+
+select busistatus, vbillstatus,modifiedtime ,modifier 
   from cmp_apply
- where vbillno = 'SS17120120'
-   --for update --æ±‡ç‡é—®é¢˜å¯¼è‡´ä»˜æ¬¾å•ä¿å­˜æŠ¥é”™  ç´¯è®¡ä»˜æ¬¾é‡‘é¢ä¸å¯å¤§äºç´¯è®¡ä»˜æ¬¾ç”³è¯·çš„é‡‘é¢
+ where vbillno = 'SS18020175'
+   for update --»ãÂÊÎÊÌâµ¼ÖÂ¸¶¿îµ¥±£´æ±¨´í  ÀÛ¼Æ¸¶¿î½ğ¶î²»¿É´óÓÚÀÛ¼Æ¸¶¿îÉêÇëµÄ½ğ¶î  
+
+
+select  busistatus,vbillstatus 
+  from cmp_apply_b
+ where pk_apply =
+       (select pk_apply from cmp_apply where vbillno = 'SS18020175') for update
