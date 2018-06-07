@@ -1,7 +1,4 @@
---用户状态表查询
-select *
-  from sm_user_ex
- where user_id = (select cuserid from sm_user where user_code = '226223')
+select * from sm_user_ex
 
 /*//状态标识用户被管理员锁定
   public final static String ISLOCKED_BY_ADMIN = "1";
@@ -23,5 +20,3 @@ select *
   
   //记录用户初始化密码状态
   public final static String USERINITPWDSTATUS = "4";  */
-
-

@@ -3,4 +3,4 @@ select nnum,nastnum,ntotalnotoutnum,vchangerate,nqtunitnum
  where cdeliveryid =
        (select cdeliveryid
           from so_delivery
-         where vbillcode = '81200DN20180517003') --for update
+         where vbillcode = '81300DN20180529006') for update
