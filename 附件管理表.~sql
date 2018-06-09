@@ -6,7 +6,6 @@ select code,name,pk_org from  org_orgs ; --组织
 select billtypename, pk_billtypecode from bd_billtype --单据类型
   
 
-select * from (
 /*客户申请单无附件*/
 select pk_org, pk_billtype, billnumber, creator, creationtime
   from bd_customer_pf
@@ -50,6 +49,7 @@ select pk_org, cbilltypecode, vbillcode, billmaker, creationtime
                (select substr(FILEPATH, 1, 20) from SM_PUB_FILESYSTEM)
            and dr = 0
            and blatest = 'Y')
+
 union all
 /*销售合同无附件*/
 select pk_org, cbilltypecode, vbillcode, creator, creationtime
@@ -80,7 +80,6 @@ select pk_org, pk_billtypecode, vbillno, creator, creationtime
          where pk_apply in
                (select substr(FILEPATH, 1, 20) from SM_PUB_FILESYSTEM)
            and dr = 0)
-           )
 
        
        
