@@ -5,7 +5,7 @@ select sum(ngrouptaxmny)
  where cfirstbid in
        (select pk_order_b
           from po_order_b
-         where ccontractid = (select pk_ct_pu
+         where csourceid = (select pk_ct_pu
                               from ct_pu
                              where vbillcode = 'GCL/XXJC-QT-2017-087'
                                and dr = 0
