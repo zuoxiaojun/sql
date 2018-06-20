@@ -4,11 +4,11 @@
 
 select busistatus, vbillstatus,modifiedtime ,modifier 
   from cmp_apply
- where vbillno = 'SS18020175'
+ where vbillno = 'SS18050220'
    for update --汇率问题导致付款单保存报错  累计付款金额不可大于累计付款申请的金额  
 
 
 select  busistatus,vbillstatus 
   from cmp_apply_b
  where pk_apply =
-       (select pk_apply from cmp_apply where vbillno = 'SS18020175') for update
+       (select pk_apply from cmp_apply where vbillno = 'SS18050220') for update
