@@ -17,7 +17,7 @@ select sum(ntaxmny)
          where cctmanageid =
                (select pk_ct_sale
                   from ct_sale
-                 where vbillcode = 'GCL-XMBU-XS-2017-0007'
+                 where vbillcode = 'GCL-XXJC-XSSW-2018-0226'
                    and dr = '0'
                    and blatest = 'Y')
            and dr = '0')
