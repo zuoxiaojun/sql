@@ -1,4 +1,4 @@
-select src_syscode,dr from ar_gatherbill where billno ='80100SK18050281' for update 
+
 
 
 update  ar_gatherbill set dr=1 where billno ='81500SK18060004';

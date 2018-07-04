@@ -1,27 +1,15 @@
 --用户状态表查询
 select *
   from sm_user_ex
- where user_id = (select cuserid from sm_user where user_code = '226223')
+ where user_id = (select cuserid from sm_user where user_code = '222680') 
+--删除此表数据即不提示密码重置
 
-/*//状态标识用户被管理员锁定
-  public final static String ISLOCKED_BY_ADMIN = "1";
-  
-  //状态标识用户被自行锁定
-  public final static String ISLOCKED_BY_SELF = "2";
-  
-  //状态标识用户密码重置
-  public final static String ISRESET_PWD = "3";
-  
-  //标识不解锁状态
-  public final static int UNLOCKTIME = -1;
-  
-  //记录用户被锁定的状态码
-  public final static String LOCKED = "islocked"; 
-  
-  //记录用户密码被充值的状态码 
-  public final static String RESET = "reset";
-  
-  //记录用户初始化密码状态
-  public final static String USERINITPWDSTATUS = "4";  */
+select count(*)  from sm_user_ex
+select count(*)  from sm_user
 
-
+delete from sm_user_ex
+ where user_id = (select cuserid from sm_user where user_code = '226680')
+ 
+ create table sm_user_ex_bak  as  select * from sm_user_ex
+ 
+ select * from sm_user_ex_bak

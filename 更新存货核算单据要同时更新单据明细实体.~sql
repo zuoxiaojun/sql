@@ -1,8 +1,17 @@
 select crowno, nnum, nastnum, nprice, nmny
   from ia_iibill_b
  where cbillid =
-       (select cbillid from ia_iibill where vbillcode = '80100II2018010167' and dr=0) for update  --è°ƒæ‹¨å…¥åº“å•
+       (select cbillid from ia_iibill where vbillcode = '80100II2018010167' and dr=0) for update  --µ÷²¦Èë¿âµ¥
+       
+       
+       
+       select nnum, nprice, nmny, cbill_bid 
+         from ia_i2bill_b
+        where cbillid = (select cbillid
+                           from ia_i2bill
+                          where vbillcode = '80900I22018060610') for update --²É¹ºÈë¿âµ¥
+
 
 select nnum, nprice, nmny
   from ia_detailledger
- where cbillid = '1001D1100000008W7IKU' for update  --å•æ®æ˜ç»†å®ä½“
+ where cbill_bid  = '1001D110000000AUHJ2O' for update  --µ¥¾İÃ÷Ï¸ÊµÌå

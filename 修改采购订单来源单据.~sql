@@ -1,8 +1,8 @@
 --修改采购订单来源单据
 
-select  pk_ct_pu, bshowlatest,version   from ct_pu where vbillcode ='FAT/18-19/0093'  and dr =0  --1001D110000000AMK68G
+select  pk_ct_pu, bshowlatest,version   from ct_pu where vbillcode ='FAT/18-19/0093'  and dr =0  --1001D110000000ASYT6U
 
-select cfirstid,csourceid,ccontractid,vcontractcode,dr
+select cfirstid,csourceid,ccontractid,vcontractcode
   from po_order_b
  where pk_order in (select pk_order
                       from po_order

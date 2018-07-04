@@ -15,8 +15,38 @@ select sum(ntaxmny)"本币价税合计" ,sum(norigtaxmny )"价税合计"
          where cctmanageid =
                (select pk_ct_sale
                   from ct_sale
-                 where vbillcode = 'GCL/XMBU-XSSW-2017-0807号'
+                 where vbillcode = 'GCLXMBU-XSSW2017-0263号'
                    and dr = '0'
                    and blatest = 'Y')
            and dr = '0')
-    and dr =0  --根据销售合同查询销售开票金额
+    and dr =0  --根据销售合同查询销售开票金额 
+
+
+
+
+select dbilldate,nastnum,norigtaxmny 
+  from so_saleinvoice_b
+ where cfirstbid in
+       (select csaleorderbid
+          from so_saleorder_b
+         where cctmanageid =
+               (select pk_ct_sale
+                  from ct_sale
+                 where vbillcode = 'GCL/XXJC-XSSW-2018-0042'
+                   and dr = '0'
+                   and blatest = 'Y')
+           and dr = '0')
+    and dr =0  --根据销售合同查询销售开票
+
+
+
+
+
+
+
+
+
+
+
+
+

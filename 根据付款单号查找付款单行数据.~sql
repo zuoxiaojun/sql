@@ -8,6 +8,6 @@ select pk_subjcode,
        def30      -- "TRÆ±¾ÝºÅ"
   from ap_payitem
  where pk_paybill =
-       (select pk_paybill from ap_paybill where billno = '80100FK18050134' and dr =0)
+       (select pk_paybill from ap_paybill where billno = '80501FK18050045' and dr =0)
    for update
 
