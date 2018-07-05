@@ -7,4 +7,12 @@
       
       select corigcurrencyid, vbillcode, dr
         from to_settlelist
-       where corigcurrencyid = '美元'
+       where corigcurrencyid = '~'
+       
+       
+       select distinct(corigcurrencyid) from to_settlelist 
+
+ 
+select pk_currtype  from bd_currtype where name='日元'  --1002Z0100000000001K6
+
+  

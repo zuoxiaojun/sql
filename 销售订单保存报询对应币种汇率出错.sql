@@ -16,3 +16,6 @@
 select pk_currtype  from bd_currtype where name='日元'  --1002Z0100000000001K6
 
   
+    update to_settlelist
+         set corigcurrencyid = '1002Z0100000000001K6'
+       where corigcurrencyid = '日元'; --更新內部結算清單表頭币种日元为日元主键
