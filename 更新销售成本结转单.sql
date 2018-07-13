@@ -5,7 +5,7 @@ update ia_i5bill_b
     set nmny=round((nnum*nprice ),6)
   where cbillid = (select cbillid
                      from ia_i5bill
-                    where vbillcode = '80100I52018061338'
+                    where vbillcode = '80100I52018061182'
                       and dr = 0);
                      
 --更新单据明细实体 金额=单价*数量
@@ -13,5 +13,23 @@ update ia_detailledger
    set nmny=round((nnum*nprice ),6)
  where cbillid = (select cbillid
                     from ia_i5bill
-                   where vbillcode = '80100I52018061338'
+                   where vbillcode = '80100I52018061182'
                      and dr = 0)
+
+
+select nprice, nnum,nmny
+  from ia_i5bill_b
+ where cbillid = (select cbillid
+                    from ia_i5bill
+                   where vbillcode = '80100I52018061182'
+                     and dr = 0)
+   for update;
+
+select nprice, nnum,nmny
+  from ia_detailledger
+ where cbillid = (select cbillid
+                    from ia_i5bill
+                   where vbillcode = '80100I52018061182'
+                     and dr = 0) for update
+ 
+
