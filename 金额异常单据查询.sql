@@ -14,6 +14,7 @@ select a.pk_org,
       --and a.vbillcode='80100II2018030211'
    and round(b.nprice * b.nnum, 2) <> b.nmny
    and a.caccountperiod > '2018-01'
+   and abs(b.nmny - (round(b.nprice * b.nnum, 2))) > 500
    
 --调拨出库单金额异常
 select a.pk_org,
@@ -66,6 +67,8 @@ select a.pk_org,
      select a.pk_org,
             a.vbillcode,
             a.dbilldate,
+            b.nitemdiscountrate,
+            b.ndiscountrate,
             b.norigtaxprice,
             b.nnum,
             b.norigtaxmny,

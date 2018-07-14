@@ -29,6 +29,7 @@ select a.pk_org,
  where a.dr = 0
    and b.dr = 0
    and round(b.nprice * b.nnum, 2) <> b.nmny
+
    
 --销售成本结转单金额异常
 select a.pk_org,
@@ -60,7 +61,7 @@ select a.pk_org,
    where a.dr = 0
      and b.dr = 0
      and round(b.norigprice * b.nnumber, 0) <> round(b.norigmny, 0)
-     
+     and b.dbilldate > '2018-07-01 00:00:00'
   --销售订单金额 异常
      select a.pk_org,
             a.vbillcode,
