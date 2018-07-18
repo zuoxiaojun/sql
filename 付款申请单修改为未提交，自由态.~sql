@@ -1,6 +1,6 @@
 select vbillstatus, busistatus
-  /* ¸¶¿îÉêÇëµ¥ĞŞ¸ÄÎªÎ´Ìá½»£¬×ÔÓÉÌ¬*/
+  /* ä»˜æ¬¾ç”³è¯·å•ä¿®æ”¹ä¸ºæœªæäº¤ï¼Œè‡ªç”±æ€*/
 
 update cmp_apply
    set vbillstatus = '-1', busistatus = '1'
- where vbillno = 'SS18060104'
+ where vbillno = 'SS18021445'

@@ -2,6 +2,8 @@ select def2 from ar_gatherbill where billno ='80100SK18050128'
 
 select billno,def2 from ar_gatherbill where def2 ='~' and dr=0
 --资金接口数据传输表头对应客户丢失
+
+
 --更新收款表头自定义项2为对应的表体客户
 
 UPDATE ar_gatherbill A
@@ -13,3 +15,6 @@ UPDATE ar_gatherbill A
           FROM ar_gatheritem b
          WHERE A.pk_gatherbill = b.pk_gatherbill)
    and a.def2 = '~'
+
+
+select billno,def3 from ar_gatherbill where def3 ='~' and dr=0--表头合同号没填
