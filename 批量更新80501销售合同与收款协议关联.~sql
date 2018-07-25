@@ -23,6 +23,7 @@ select * from HTSKXY
 --借助odbc导入关联数据
 
 --更新合同收款协议字段
+
 update ct_sale a
    set a.pk_payterm =
        (select skxypk from htskxy b where a.vbillcode = b.htcode)
