@@ -1,0 +1,16 @@
+select code, name, pk_supplier
+  from bd_customer
+ where pk_supplier = '~'
+   and dr = 0
+   and enablestate = '2'
+;
+select code, name, corcustomer
+  from bd_supplier
+ where corcustomer = '~'
+   and dr = 0
+   and enablestate = '2'
+
+--查询客商未关联但名称相同的数据
+select name, a
+  from (select count(name) a, name from bd_cust_supplier group by name)
+ where a = 2

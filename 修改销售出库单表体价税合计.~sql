@@ -1,0 +1,9 @@
+
+--修改销售出库单表体价税合计
+select norigtaxmny
+  from ic_saleout_b
+ where cgeneralhid =
+       (select cgeneralhid
+          from ic_saleout_h
+         where vbillcode = '81300XC20180707029')
+   for update
