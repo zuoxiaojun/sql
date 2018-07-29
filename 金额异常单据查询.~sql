@@ -83,8 +83,38 @@ select a.pk_org,
         and round(b.norigtaxprice * b.nnum, 0) <> round(norigtaxmny, 0)
         and a.dbilldate > '2018-07-01 00:00:00'
       
-      
-      
+      --发货单金额异常
+           select a.pk_org,
+            a.vbillcode,
+            a.dbilldate,
+            b.cdeliverybid,
+            b.nitemdiscountrate,
+            b.ndiscountrate,
+            b.norigtaxprice,
+            b.nnum,
+            b.norigtaxmny,
+            b.nqtorigtaxprice * b.nnum "je"
+       from so_delivery a
+       left join so_delivery_b b
+         on a.cdeliveryid = b.cdeliveryid
+      where a.dr = 0
+        and b.dr = 0
+        and round(b.norigtaxprice * b.nnum, 0) <> round(norigtaxmny, 0)
+        
+        --销售出库单金额异常
+      select a.pk_org,
+             a.vbillcode,
+             a.dbilldate,           
+             b.norigtaxprice,
+             b.nnum,
+             b.norigtaxmny,
+             b.nqtorigtaxprice * b.nnum "je"
+        from ic_saleout_h a
+        left join ic_saleout_b b
+          on a.cgeneralhid = b.cgeneralhid
+       where a.dr = 0
+         and b.dr = 0
+         and round(b.norigtaxprice * b.nnum, 0) <> round(norigtaxmny, 0)
       
       
       
