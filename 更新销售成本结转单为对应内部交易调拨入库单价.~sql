@@ -31,8 +31,6 @@ and b.nprice is null
 and v.nprice is not null;
 
 
-select * from v_gcl_i5itemupdate    --查询出需要修改的单据
-
 --更新ia_detailledger
 update ia_detailledger a set (a.nprice,a.nmny) = (select v.nprice,nvl(v.nprice,0)*nvl(a.nnum,0) nmny from v_gcl_i5itemupdate v where a.cbill_bid = v.cbill_bid)
 where a.dr = 0 and exists (select 1 from v_gcl_i5itemupdate v where a.cbill_bid = v.cbill_bid);

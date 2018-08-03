@@ -1,0 +1,4 @@
+select vpathcode, vpathname
+  from to_settlepath
+ where blatestflag = 'Y'
+   and dr = 0
