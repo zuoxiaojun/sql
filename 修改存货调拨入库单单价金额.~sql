@@ -1,0 +1,8 @@
+
+--修改存货调拨入库单单价金额
+select nnum,nprice,nmny from ia_iibill_b where cbill_bid='1001D110000000BQSAMM' for update 
+--1	840.00000000	710.05920200	596449.73000000
+
+select nnum, nprice, nmny
+  from ia_detailledger
+ where cbill_bid = '1001D110000000BQSAMM' for update   --单据明细实体
