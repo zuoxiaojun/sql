@@ -1,5 +1,3 @@
-
---凭证号重复
 select pk_accountingbook, count(num), period, pk_vouchertype, year, num
   from gl_voucher
  where period <> '00'
@@ -15,5 +13,3 @@ select pk_accountingbook, code
 select name
   from bd_vouchertype
  where pk_vouchertype = '1001A110000000005M23' --转账凭证
- 
- 
