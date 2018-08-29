@@ -1,0 +1,7 @@
+--客户档案与供应商档案查询重复值
+
+select name, count(name)
+  from bd_cust_supplier
+ group by name
+having count(name) > 1
+

@@ -1,0 +1,20 @@
+
+--gotoÓï¾ä
+declare
+ v_cnt int :=1;
+ begin
+   loop 
+     dbms_output.put_line(v_cnt);
+     if v_cnt = 10 then
+       goto end_loop;
+       end if;
+       v_cnt :=v_cnt+1;
+       end loop;
+       <<end_loop>>
+       dbms_output.put_line('Ñ­»·½áÊø');
+   end;
+    
+   
+   
+   --nullÓï¾ä
+   
