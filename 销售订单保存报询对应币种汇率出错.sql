@@ -7,15 +7,26 @@
       
       select corigcurrencyid, vbillcode, dr
         from to_settlelist
-       where corigcurrencyid = '~'
+       where corigcurrencyid = '~'  
        
        
        select distinct(corigcurrencyid) from to_settlelist 
 
  
 select pk_currtype  from bd_currtype where name='日元'  --1002Z0100000000001K6
-
+select code, name, pk_currtype from bd_currtype where name='人民币' --1002Z0100000000001K1
   
     update to_settlelist
          set corigcurrencyid = '1002Z0100000000001K6'
        where corigcurrencyid = '日元'; --更新內部結算清單表頭币种日元为日元主键
+
+
+    update to_settlelist
+         set corigcurrencyid = '1002Z0100000000001K8'
+       where corigcurrencyid = '美元'; 
+       
+         update to_settlelist
+         set corigcurrencyid = '1002Z0100000000001K1'
+       where corigcurrencyid = '人民币'; 
+       
+     
