@@ -1,4 +1,9 @@
+--建立更新表wl
+
+
 select * from wl
+
+--odbc导入数据
 
 --更新物料名称
 update bd_material a
@@ -23,12 +28,14 @@ update bd_material_v a
  where exists (select 1 from wl b where a.code = b.code);
 
 --物料编码前加上（待封存）
+--建立封存数据表fcwl
+
 update bd_material
    set name = '（待封存）' || name 
  where code in
        (select code
           from fcwl
-        minus (select code from bd_material where name like '（待封存）%'))
+        minus (select code from bd_material where name like '（待封存）%'))--排除原有待封存标记的
 
 
 update bd_material_v
