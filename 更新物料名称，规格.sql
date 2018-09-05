@@ -3,20 +3,21 @@
 
 select * from wl
 
-truncate table wl
+--truncate table wl
 --odbc导入数据
 --备份原表
-create table bd_material_bak0902 as select * from bd_material
+create table bd_material_bak0904 as select * from bd_material
+
+select code,name,memo from bd_material_bak0904 where memo like '%PDM%'
 
 
 --将原名称规格写入备注字段
-
 update bd_material
-   set memo ='原名称规格:'||name||materialspec
+   set memo = '原名称规格:' || name || materialspec
  where code in (select code from wl)
 
-update bd_material
-   set memo ='原名称规格:'||name||materialspec
+ update bd_material_v set
+ memo = '原名称规格:' || name || materialspec
  where code in (select code from wl)
  
 --更新物料名称
@@ -40,25 +41,9 @@ update bd_material_v a
    set a.materialspec =
        (select b.guige from wl b where a.code = b.code)
  where exists (select 1 from wl b where a.code = b.code);
-
-/*物料编码前加上（待封存）*/
---建立封存数据表fcwl
-
-update bd_material
-   set name = '（待封存）' || name 
- where code in
-       (select code
-          from fcwl
-        minus (select code from bd_material where name like '（待封存）%'))--排除原有待封存标记的
-
-
-update bd_material_v
-   set name = '（待封存）' || name
- where code in
-       (select code
-          from fcwl
-        minus (select code from bd_material where name like '（待封存）%'))
-
+ 
+ 
+ 
 
 
 
