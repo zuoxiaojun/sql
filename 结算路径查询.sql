@@ -1,5 +1,6 @@
-select *
+select vpathcode, vpathname
   from to_settlepath
  where blatestflag = 'Y'
    and dr = 0
-   and vpathname='816-801-80501'
+   and vpathcode = '117'
+   for update

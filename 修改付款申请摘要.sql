@@ -1,5 +1,5 @@
---修改付款申请摘要
-select SUMMARY
+--修改付款申请
+select olcapplymny
   from cmp_apply_b
  where   pk_apply  =
-       (select   pk_apply  from cmp_apply where vbillno = 'SS18061984') for update   
+       (select   pk_apply  from cmp_apply where vbillno = 'SS18070120') for update   

@@ -1,0 +1,24 @@
+select b.bstockclose, a.vbillcode
+  from po_order a
+  left join po_order_b b
+    on a. pk_order = b. pk_order
+ where a.ctrantypeid in
+       (select pk_billtypeid
+          from bd_billtype
+         where pk_billtypecode in ('21-Cxx-01', '21-Cxx-02'))
+and b.bstockclose = 'N');
+
+--查询采购订单入库未关闭的数据
+select pk_org, vbillcode, dbilldate
+  from po_order
+ where ctrantypeid in
+       (select pk_billtypeid
+          from bd_billtype
+         where pk_billtypecode in ('21-Cxx-01', '21-Cxx-02'))
+   and pk_order in
+       (select distinct (pk_order) from po_order_b where bstockclose = 'N')
+ order by dbilldate
+
+
+
+

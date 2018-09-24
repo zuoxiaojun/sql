@@ -45,8 +45,32 @@ select distinct(pk_org) from ct_sale where vdef20='Y' and pk_org_v is null
 select pk_org,pk_org_v from ct_sale where pk_org='0001D11000000007DSO7'
 
 
-select dr from ct_sale_b where pk_ct_sale =(select pk_ct_sale from ct_sale where vbillcode='C-N011-C-2016-007-应收补8') for update 
 
+select vbillcode,dr from ct_sale where pk_ct_sale='1001D110201707241017'
 
+--期初历史合同修改后更新表体删除标记
 
-select * from bd_income where   pk_income ='1001D1100000004FVZ1T'
+update ct_sale_b
+   set dr = 0
+ where pk_ct_sale in (select pk_ct_sale
+                        from ct_sale
+                       where vdef20 = 'Y'
+                         and dr = 0)
+   and dr = 1
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
