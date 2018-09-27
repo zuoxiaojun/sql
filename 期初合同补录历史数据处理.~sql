@@ -35,6 +35,8 @@ select pk_org,pk_org_v from ct_sale where vdef20='Y'
 0001D11000000007DSO7                  0001D11000000007DSO6
 0001D11000000004VL4H                   0001D11000000004VL4G
 
+801  	0001D11000000007DSO7	0001D11000000007DSO6
+
 */
 select distinct(pk_org) from ct_sale where pk_org='0001D11000000007DSO7'  
 
@@ -46,7 +48,7 @@ select pk_org,pk_org_v from ct_sale where pk_org='0001D11000000007DSO7'
 
 
 
-select vbillcode,dr from ct_sale where pk_ct_sale='1001D110201707241017'
+select vbillcode,dr,subscribedate from ct_sale where substr(subscribedate,1,10)='2018-09-18' and vdef20='Y'
 
 --期初历史合同修改后更新表体删除标记
 
@@ -60,9 +62,9 @@ update ct_sale_b
    
    
    
+
    
-   
-   
+
    
    
    

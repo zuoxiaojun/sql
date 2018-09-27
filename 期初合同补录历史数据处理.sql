@@ -60,7 +60,11 @@ update ct_sale_b
                          and dr = 0)
    and dr = 1
    
-   
+   --插入行号修改保存后就不会删除了
+   update ct_sale_b
+   set crowno = '10'
+ where pk_ct_sale in (select pk_ct_sale from ct_sale where VDEF20 = 'Y')
+   and crowno is null
    
 
    

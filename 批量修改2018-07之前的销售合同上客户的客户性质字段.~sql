@@ -18,8 +18,5 @@ update ct_sale a
    set a.vdef4 =
        (select b.xzpk from khxz b where a.pk_customer = b.khpk)
  where exists (select * from khxz b where a.pk_customer = b.khpk)
-   and a.vdef4 ='~'
-
-
-
+   and vdef4 = '~'
 
