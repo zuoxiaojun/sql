@@ -12,7 +12,7 @@ select sum(ngrouptaxmny)
            and a.bislatest = 'Y'  --采购订单最新版本
            and ccontractid = (select pk_ct_pu
                                 from ct_pu
-                               where vbillcode = 'GCL/XZXY-CG-2017-0682'
+                               where vbillcode = 'GCL/XXJC-QT-2017-99'
                                  and dr = 0
                                  and blatest = 'Y'))
 
