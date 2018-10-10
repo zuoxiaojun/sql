@@ -1,6 +1,5 @@
 
 /*修改采购发票单据状态*/
-/*�޸Ĳɹ���Ʊ����״̬*/
 
 select fbillstatus  from po_invoice where VBillcode='81900CF201801090002' ;
 
