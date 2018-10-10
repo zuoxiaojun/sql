@@ -5,7 +5,7 @@ naccuminvoicenum --累计开票主数量
   from po_order_b
  where pk_order = (select pk_order
                      from po_order
-                    where vbillcode = '81600CD20171123012'
+                    where vbillcode = '81600CD20180723001'
                       and dr = 0
                       and bislatest = 'Y')
    for update
