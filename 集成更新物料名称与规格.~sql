@@ -10,9 +10,11 @@ guige     varchar2(200)
  
  --ODBC数据导入
  select * from wl
- 
- --将原名称，规格找个自定义字段存起来
- 
+ truncate table wl
+ --将原名称，规格追加到备注字段
+ update bd_material
+    set memo  = "原名称规格："||name || materialspec 
+  where code in (select code from wl)
  
  --数据更新
  update bd_material a
