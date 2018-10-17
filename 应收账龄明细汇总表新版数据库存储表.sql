@@ -8,7 +8,14 @@ select * from GCL_ARAGEDETAIL_B  --CONTRACTNO
 select *
   from GCL_ARAGEDETAIL a
   left join GCL_ARAGEDETAIL_B b
-    on a.pk_bill = b.pk_bill
+    on a.pk_bill = b.pk_bill order by b.ts desc
+
+
+
+select sum(yqqk_n_30), sum(yqqk_31_60), sum(yqqk_61_90)
+  from GCL_ARAGEDETAIL_B
+ where CONTRACTNO = 'CHYN-GCL201805-1'
+  
 
 
 

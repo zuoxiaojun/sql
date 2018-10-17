@@ -9,14 +9,14 @@ guige     varchar2(200)
  tablespace nnc_data01;
  
  --ODBC数据导入
- select * from wl
+ select * from wl;
  truncate table wl
  
-  create table bd_material_20181011 as select * from bd_material; --备份
+  create table bd_material_20181015 as select * from bd_material; --备份
  
  --将原名称，规格追加到备注字段
  update bd_material
-    set memo  = '原名称规格：' ||name || materialspec 
+    set memo  =  '原名称规格：' ||name || materialspec 
   where code in (select code from wl)
  
 update bd_material_v

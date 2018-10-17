@@ -9,7 +9,7 @@ select busistatus,
        olcrate,
        dr    
   from cmp_apply
- where vbillno = 'SS18070120'
+ where vbillno = 'SS18040180'
    for update --汇率问题导致付款单保存报错  累计付款金额不可大于累计付款申请的金额
 
 
@@ -18,5 +18,24 @@ select busistatus,
        olcrate  
   from cmp_apply_b
  where pk_apply =
-       (select pk_apply from cmp_apply where vbillno = 'SS18070120')
+       (select pk_apply from cmp_apply where vbillno = 'SS18050266')
+   for update
+
+
+
+/*付款申请单未付金额错误*/
+
+select busistatus,
+       vbillstatus,
+       olcrate  ,
+       glcpaymny ,
+       gllcpaymny ,
+       olcpaymny ,paymny ,
+       gllcunpaymny ,
+       glcunpaymny ,
+       olcunpaymny ,
+       unpaymny 
+  from cmp_apply_b
+ where pk_apply =
+       (select pk_apply from cmp_apply where vbillno = 'SS18040180')
    for update

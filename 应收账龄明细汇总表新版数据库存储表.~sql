@@ -8,7 +8,7 @@ select * from GCL_ARAGEDETAIL_B  --CONTRACTNO
 select *
   from GCL_ARAGEDETAIL a
   left join GCL_ARAGEDETAIL_B b
-    on a.pk_bill = b.pk_bill
+    on a.pk_bill = b.pk_bill order by b.ts desc
 
 
 
