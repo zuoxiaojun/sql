@@ -1,0 +1,114 @@
+
+第八题
+{
+	通过 SMB 共享目录
+在 system1 上配置SMB服务 ，要求：
+您的 SMB 服务器必须是 STAFF 工作组的一个成员
+共享 /common 目录，共享名必须为 common
+只有 group8.example.com 域内的客户端可以访问common共享
+common 必须是可以浏览的
+用户 andy 必须能够读取共享中的内容，如果需要的话，验证密码是redhat
+}
+
+1、安装服务 
+ yum isntall -y samba samba-client cifs-utils  
+
+2、
+ systemctl enable smb
+ systemctl enable nmb
+
+3、添加防火墙
+
+ firewall-cmd --permanent --add-service=samba
+ firewall-cmd --permanent --add-service=samba-client
+
+4、mkdir /common
+
+5、设置上下文
+ 
+ semanage fcontext -a -t samba_share_t '/common(/.*)?'
+ restorecon -RFv /common/
+ chcon -t samba_share_t /common/
+ ll -Zd /common/
+
+6、修改samb配置文件
+ vim /etc/samba/smb.conf
+ 	workgroup = STAFF
+
+ 	[common]
+ 		path = /common
+        browseable = yes
+        writable = yes
+        hosts allow = 172.24.8.
+        valid user = andy
+
+  
+7、启动服务
+	systemctl restart smb.service 
+	systemctl restart nmb.service
+
+8、测试
+	smbpasswd -a andy
+
+	smbclient -L localhost -U andy
+	[root@system1 ~]# smbclient -L localhost -U andy
+	Enter andy's password: 
+Domain=[STAFF] OS=[Windows 6.1] Server=[Samba 4.2.3]
+
+	Sharename       Type      Comment
+	---------       ----      -------
+	common          Disk      
+	IPC$            IPC       IPC Service (Samba Server Version 4.2.3)
+	andy            Disk      Home Directories
+Domain=[STAFF] OS=[Windows 6.1] Server=[Samba 4.2.3]
+
+	Server               Comment
+	---------            -------
+	SYSTEM1              Samba Server Version 4.2.3
+
+	Workgroup            Master
+	---------            -------
+	STAFF                SYSTEM1
+
+
+第九题
+{
+	配置多用户SMB挂载
+}
+
+system1
+[root@system1 ~]# vim /etc/samba/smb.conf 
+
+	[devops]
+        path = /devops
+        hosts allow = 172.24.8.
+        browseable = yes
+        writable = no
+        write list = akira
+        
+[root@system1 ~]# mkdir /devops
+[root@system1 ~]# semanage fcontext -a -t "samba_share_t" '/devops(/.*)?'
+[root@system1 ~]# restorecon -RFv /devops
+[root@system1 ~]# chcon -R -t samba_share_t /devops/
+[root@system1 ~]# [root@system1 ~]# setfacl -m u:akira:rwx /devops/
+[root@system1 ~]# systemctl restart smb nmb
+[root@system1 ~]# smbpasswd -a silene
+[root@system1 ~]# smbpasswd -a akira
+
+
+[root@system2 ~]# mkdir /mnt/dev
+[root@system2 ~]# yum install -y cifs-utils samba-client
+[root@system2 ~]# vim /etc/fstab 
+
+//172.24.8.11/devops /mnt/dev cifs defaults,multiuser,username=silene,password=redhat,sec=ntlmssp 0  0
+[root@system2 ~]# mount -a
+[root@system2 ~]# df -hT
+Filesystem           Type      Size  Used Avail Use% Mounted on
+/dev/sda1            xfs       9.8G  3.1G  6.8G  32% /
+devtmpfs             devtmpfs  765M     0  765M   0% /dev
+tmpfs                tmpfs     773M  140K  773M   1% /dev/shm
+tmpfs                tmpfs     773M  8.9M  765M   2% /run
+tmpfs                tmpfs     773M     0  773M   0% /sys/fs/cgroup
+//172.24.8.11/devops cifs      9.8G  3.2G  6.7G  33% /mnt/dev
+
+
