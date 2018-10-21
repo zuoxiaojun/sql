@@ -1,0 +1,93 @@
+{	第十二题：
+	实现一个 web 服务器
+在 system1 上配置一个站点 http://system1.group8.example.com/，然后执行下述步骤：
+从 http://server.group8.example.com/pub/system1.html 下载文件，并且将文件重名为 index.html 不要修改此文件的内容
+将文件 index.html 拷贝到您的 web 服务器的 DocumentRoot 目录下
+来自于 group8.example.com 域的客户端可以访问此web服务
+来自于my133t.org域的客户端拒绝访问此web服务
+}
+
+
+[root@system1 ~]#  yum -y install httpd mod_ssl mod_wsgi
+[root@system1 ~]#  systemctl enable httpd
+[root@system1 ~]# firewall-cmd --permanent --add-service=http
+success
+[root@system1 ~]# firewall-cmd --permanent --add-service=https
+success
+[root@system1 ~]# firewall-cmd --reload 
+success
+[root@system1 ~]# wget -O /var/www/html/index.html http://172.24.8.254/pub/system1.html
+
+[root@system1 ~]# vim /etc/httpd/conf/httpd.conf 
+	ServerName system1.group8.example.com:80
+
+[root@system1 conf.d]# cp  /usr/share/doc/httpd-2.4.6/httpd-vhosts.conf /etc/httpd/conf.d/
+[root@system1 conf.d]# vim httpd-vhosts.conf 	
+
+	<VirtualHost *:80>
+    DocumentRoot "/var/www/html"
+    ServerName system1.group8.example.com
+    ErrorLog "/var/log/httpd/dummy-host.example.com-error_log"
+    CustomLog "/var/log/httpd/dummy-host.example.com-access_log" common
+</VirtualHost>
+
+
+配置防火墙拒绝 172.13.8.0/24  http服务
+
+
+
+{	第十三题：
+	配置安全web服务
+为站点 http://system1.group8.example.com 配置TLS加密：
+一个已签名证书从 http://server.group8.example.com/pub/tls/certs/system1.crt 获取
+此证书的密钥从 http://server.group8.example.com/pub/tls/private/system1.key 获取
+此证书的签名授权信息从 http://server.group8.example.com/pub/tls/certs/ssl-ca.crt 获取 
+}
+
+
+[root@system1 ~]# yum install -y mod_ssl
+
+[root@system1 conf.d]# cd /etc/httpd/conf.d/
+
+[root@system1 conf.d]# cp /usr/share/doc/httpd-2.4.6/httpd-vhosts.conf vhosts.conf
+
+[root@system1 conf.d]# wget -O /etc/pki/tls/certs/system1.crt http://server.group8.example.com/pub/tls/certs/system1.crt
+
+[root@system1 conf.d]# wget -O /etc/pki/tls/private/system1.key http://server.group8.example.com/pub/tls/private/system1.key
+
+[root@system1 conf.d]#  wget -O /etc/pki/tls/certs/ssl-ca.crt http://server.group8.example.com/pub/tls/certs/ssl-ca.crt
+
+[root@system1 conf.d]# systemctl restart httpd.service 
+
+[root@system1 conf.d]# systemctl status -l httpd.service 
+
+[root@system1 conf.d]# firewall-cmd --permanent --add-service=https
+success
+
+[root@system1 conf.d]# firewall-cmd --reload 
+success
+
+[root@system1 conf.d]# vim vhosts.conf 
+
+<VirtualHost *:80>
+    DocumentRoot "/var/www/html"
+    ServerName system1.group8.example.com
+    ErrorLog "/var/log/httpd/dummy-host.example.com-error_log"
+    CustomLog "/var/log/httpd/dummy-host.example.com-access_log" common
+</VirtualHost> 
+    
+<VirtualHost *:443>
+    DocumentRoot "/var/www/html"
+    ServerName system1.group8.example.com
+    ErrorLog "/var/log/httpd/dummy-host2.example.com-error_log"
+    CustomLog "/var/log/httpd/dummy-host2.example.com-access_log" common
+</VirtualHost>
+
+[root@system1 conf.d]# vim /etc/httpd/conf.d/ssl.conf 
+
+ <-- find following command
+ 
+  SSLEngine on        
+    SSLCertificateFile /etc/pki/tls/certs/server0.crt
+    SSLCertificateKeyFile /etc/pki/tls/private/system1.key
+

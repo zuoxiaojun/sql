@@ -21,7 +21,7 @@ common 必须是可以浏览的
 
  firewall-cmd --permanent --add-service=samba
  firewall-cmd --permanent --add-service=samba-client
-
+ firewall-cmd --reload
 4、mkdir /common
 
 5、设置上下文
@@ -74,6 +74,15 @@ Domain=[STAFF] OS=[Windows 6.1] Server=[Samba 4.2.3]
 第九题
 {
 	配置多用户SMB挂载
+在 system1 通过 SMB 共享目录 /devops ,并满足下列要求：
+
+共享名为 devops
+共享目录 devops 只能 group8.example.com 域中的客户端使用
+共享目录 devops 必须可以被浏览
+用户 silene 必须能以读的方式访问此共享，访问密码是redhat
+用户 akira 必须能以读写的方式访问此共享，访问密码是redhat
+此共享永久挂载在 system2.group8.example.com 上的 /mnt/dev 目录，并使用用户 silene 作为认证任何用户，可以通过用户 akira 来临时获取写的权限
+
 }
 
 system1
@@ -90,7 +99,7 @@ system1
 [root@system1 ~]# semanage fcontext -a -t "samba_share_t" '/devops(/.*)?'
 [root@system1 ~]# restorecon -RFv /devops
 [root@system1 ~]# chcon -R -t samba_share_t /devops/
-[root@system1 ~]# [root@system1 ~]# setfacl -m u:akira:rwx /devops/
+[root@system1 ~]# setfacl -m u:akira:rwx /devops/
 [root@system1 ~]# systemctl restart smb nmb
 [root@system1 ~]# smbpasswd -a silene
 [root@system1 ~]# smbpasswd -a akira

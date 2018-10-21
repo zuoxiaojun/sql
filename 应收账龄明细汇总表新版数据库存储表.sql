@@ -12,9 +12,9 @@ select *
 
 
 
-select sum(yqqk_n_30), sum(yqqk_31_60), sum(yqqk_61_90)
+select sum(YSYQ), sum(yqqk_n_30), sum(yqqk_31_60), sum(yqqk_61_90)
   from GCL_ARAGEDETAIL_B
- where CONTRACTNO = 'CHYN-GCL201805-1'
+ where CONTRACTNO = 'CNINJ-GF307-CG/SB-002'
   
 
 

@@ -8,11 +8,12 @@ select pk_material, code, name
 create table zlbx (
 code varchar2(100),
 name varchar2(100),
-zlpk   varchar2(100)
+zlpk   varchar2(100),
+zlname varchar2(100)
 )
 
 select  * from  zlbx
-truncate table zlbx
+
 
 --更新def2为主联版型
 update bd_material a

@@ -1,0 +1,122 @@
+
+{
+	配置NFS服务
+在 system1 配置NFS服务，要求如下：
+以只读的方式共享目录 /public ，同时只能被 group8.example.com 域中的系统访问
+以读写的方式共享目录 /protected ，同时只能被 group8.example.com 域中的系统访问
+访问 /protected 需要通过Kerberos安全加密，您可以使用下面URL提供的密钥
+     http://server.group8.example.com/pub/keytabs/system1.keytab
+目录 /protected 应该包含名为 project 拥有人为 andres 的子目录
+用户 andres 能以读写方式访问 /protected/project
+}
+
+
+
+
+
+{
+	在 system2 上挂载一个来自 system1.group8.example.com 的NFS共享,并符合下列要求：
+/public 挂载在下面的目录上 /mnt/nfsmount
+/protected挂载在下面的目录上 /mnt/nfssecure 并使用安全的方式，密钥下载URL如下：
+     http://server.group8.example.com/pub/keytabs/system2.keytab
+用户 andres 能够在 /mnt/nfssecure/project 上创建文件
+这些文件系统在系统启动时自动挂载
+}
+
+
+
+
+关于NFS在RHEL 7.2 系统上配置（与7.0是有一点区别的）
+
+首先你得确认，你考试的system1和system2的操作系统版本，如果是7.2就按照以下步骤去完成，否则按照视频的解题步骤
+# cat /etc/redhat-release
+Red Hat Enterprise Linux Server release 7.2 (Maipo)   <---- 看到7.2就按照此文档的配置步骤去做
+
+
+一、System1（NFS共享服务端）配置
+
+1、创建目录
+# mkdir /public
+# mkdir /protected/project -p
+
+2、设定SeLinux安全上下文
+# semanage fcontext -a -t public_content_t '/protected(/.*)?'
+# semanage fcontext -a -t public_content_rw_t '/protected/project(/.*)?'
+# restorecon -RFv /protected/
+
+3、更改目录属性
+# chown andres /protected/project/
+
+
+4、更改NFS配置
+# vim /etc/sysconfig/nfs
+
+RPCNFSDARGS="-V 4.2"  <----找到这一个参数并修改
+
+
+5、下载keytab秘钥
+# wget -O /etc/krb5.keytab http://server.group8.example.com/pub/keytabs/system1.keytab
+
+6、配置共享
+# vim /etc/exports
+/public *.group8.example.com(ro,sec=sys,sync)
+/protected *.group8.example.com(rw,sec=krb5p,sync)
+
+7、设定防火墙规则
+# firewall-cmd --add-service=rpc-bind --permanent
+# firewall-cmd --add-service=mountd --permanent
+# firewall-cmd --add-service=nfs --permanent
+# firewall-cmd --reload
+
+
+8、启动服务
+# systemctl enable nfs-server.service 	  #rhel 7.2 无法手工启动 nfs-secure-server服务，它会根据条件自动启动，您不用管
+# systemctl start nfs-server
+# exportfs -ra
+
+
+{
+	挂载一个NFS共享
+在 system2 上挂载一个来自 system1.group8.example.com 的NFS共享,并符合下列要求：
+/public 挂载在下面的目录上 /mnt/nfsmount
+/protected挂载在下面的目录上 /mnt/nfssecure 并使用安全的方式，密钥下载URL如下：
+     http://server.group8.example.com/pub/keytabs/system2.keytab
+用户 andres 能够在 /mnt/nfssecure/project 上创建文件
+这些文件系统在系统启动时自动挂载
+
+}
+二、System2(NFS客户端)配置
+
+1、创建挂载点
+# mkdir /mnt/nfsmount
+# mkdir /mnt/nfssecure
+
+2、设定开机挂载
+# vim /etc/fstab
+system1:/public     /mnt/nfsmount   nfs   defaults,sec=sys      0  0
+system1:/protected  /mnt/nfssecure  nfs4  defaults,sec=krb5p    0  0     #请注意前面是 nfs4
+
+
+3、下载秘钥
+# wget -O /etc/krb5.keytab http://server.group8.example.com/pub/keytabs/system2.keytab
+# yum install -y nfs*
+4、设定服务开机启动
+# systemctl enable nfs-client.target   
+# systemctl start nfs-client.target
+
+	注意：在rhel7.1之后的版本，已经不能手工设定nfs-secure服务开机启动，他会根据条件自动启动
+
+5、挂载验证
+
+# mount /mnt/nfsmount
+
+# systemctl restart nfs-secure   #注意：首次配置后挂载krb5p验证的nfs共享需要手工重启（该服务可以restart,但不能start和enable）
+
+# mount /mnt/nfssecure   # 如果挂载失败，请认真检查对比上面的配置步骤，确定没错之后还是无法挂载请重启system2（本机）
+
+从此之后，你重启system2，如无意外，开机会自动挂载了的
+
+
+
+
+

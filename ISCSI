@@ -1,0 +1,70 @@
+
+{	第十九题
+配置 ISCSI 服务端
+配置 system1 提供一个 ISCSI 服务 磁盘名为 iqn.2014-08.com.example.group8:system1 ，并符合下列要求：
+服务端口为 3260
+使用 iscsi_store 作其后端逻辑卷名称，其大小为 3G
+此服务只能被 system2.group8.example.com 访问
+}
+
+[root@system1 ~]# yum install targetd targetcli -y
+
+[root@system1 ~]# systemctl enable target.service
+
+[root@system1 ~]# systemctl enable iscsid
+
+[root@system1 ~]# firewall-cmd --permanent --add-rich-rule 'rule family="ipv4" source address="172.24.8.12/24" port port="3260" protocol="tcp" accept' 
+success
+
+[root@system1 ~]# firewall-cmd --reload 
+success
+
+【system1创建逻辑卷 iscsi_store】
+
+
+在system2上安装iscsi客户端
+[root@system2 iscsi]# yum install -y iscsi-initiator-utils.x86_64
+获取客户端标识
+[root@system2 ~]# cat /etc/iscsi/initiatorname.iscsi 
+InitiatorName=iqn.1994-05.com.redhat:57bcb2ccfc29
+
+[root@system1 ~]# targetcli 
+
+	/> ls
+	/backstores/block> create dev=/dev/ipsan/iscsi_store name=iscsi_store
+	/> cd iscsi/
+	/iscsi> create iqn.2014-08.com.example.group8:system1
+	/iscsi> cd iqn.2014-08.com.example.group8:system1/
+	/iscsi/iqn.20...roup8:system1> cd tpg1/
+	/iscsi/iqn.20...em1/tpg1/luns> create /backstores/block/iscsi_store
+	/iscsi/iqn.20...em1/tpg1/acls> create iqn.1994-05.com.redhat:57bcb2ccfc29
+	/iscsi/iqn.20.../tpg1/portals> create 172.24.8.11 ip_port=3260
+
+	
+
+
+	/> saveconfig 
+
+{	第二十题
+	配置 iSCISI 的客户端
+
+配置 system2 使其能连接在 system1 上提供的 iqn.2014-08.com.example.group8:system1,并符合以下要求：
+iSCISI 设备在系统启动的期间自动加载
+块设备 iSCISI 上包含一个大小为 2100 MiB 的分区，并格式化为 ext4
+此分区挂载在 /mnt/data 上，同时在系统启动的期间自动挂载
+}
+
+
+[root@system2 iscsi]# systemctl enable iscsi iscsid
+
+[root@system2 ~]# man iscsiadm 
+
+iscsiadm --mode discoverydb --type sendtargets --portal 192.168.1.10 --discover
+iscsiadm --mode node --targetname iqn.2001-05.com.doe:test --portal 192.168.1.1:3260 --login
+
+
+[root@system2 iscsi]# iscsiadm --mode discoverydb --type sendtargets --portal 172.24.8.11 --discover
+
+[root@system2 iscsi]# iscsiadm --mode node --targetname iqn.2014-08.com.example.group8:system1 --portal 172.24.8.11:3260 --login
+
+
