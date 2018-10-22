@@ -96,20 +96,23 @@ system1
         write list = akira
         
 [root@system1 ~]# mkdir /devops
-[root@system1 ~]# semanage fcontext -a -t "samba_share_t" '/devops(/.*)?'
+[root@system1 ~]# semanage fcontext -a -t samba_share_t '/devops(/.*)?'
 [root@system1 ~]# restorecon -RFv /devops
 [root@system1 ~]# chcon -R -t samba_share_t /devops/
+[root@system1 ~]# setfacl -m u:silene:r-x /devops/
 [root@system1 ~]# setfacl -m u:akira:rwx /devops/
 [root@system1 ~]# systemctl restart smb nmb
 [root@system1 ~]# smbpasswd -a silene
 [root@system1 ~]# smbpasswd -a akira
 
 
+system2
 [root@system2 ~]# mkdir /mnt/dev
 [root@system2 ~]# yum install -y cifs-utils samba-client
 [root@system2 ~]# vim /etc/fstab 
 
 //172.24.8.11/devops /mnt/dev cifs defaults,multiuser,username=silene,password=redhat,sec=ntlmssp 0  0
+
 [root@system2 ~]# mount -a
 [root@system2 ~]# df -hT
 Filesystem           Type      Size  Used Avail Use% Mounted on
