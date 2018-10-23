@@ -9,13 +9,18 @@
 
 
 [root@system1 ~]#  yum -y install httpd mod_ssl mod_wsgi
+
 [root@system1 ~]#  systemctl enable httpd
+
 [root@system1 ~]# firewall-cmd --permanent --add-service=http
 success
+
 [root@system1 ~]# firewall-cmd --permanent --add-service=https
 success
+
 [root@system1 ~]# firewall-cmd --reload 
 success
+
 [root@system1 ~]# wget -O /var/www/html/index.html http://172.24.8.254/pub/system1.html
 
 [root@system1 ~]# vim /etc/httpd/conf/httpd.conf 
@@ -47,10 +52,6 @@ success
 
 [root@system1 ~]# yum install -y mod_ssl
 
-[root@system1 conf.d]# cd /etc/httpd/conf.d/
-
-[root@system1 conf.d]# cp /usr/share/doc/httpd-2.4.6/httpd-vhosts.conf vhosts.conf
-
 [root@system1 conf.d]# wget -O /etc/pki/tls/certs/system1.crt http://server.group8.example.com/pub/tls/certs/system1.crt
 
 [root@system1 conf.d]# wget -O /etc/pki/tls/private/system1.key http://server.group8.example.com/pub/tls/private/system1.key
@@ -72,22 +73,112 @@ success
 <VirtualHost *:80>
     DocumentRoot "/var/www/html"
     ServerName system1.group8.example.com
-    ErrorLog "/var/log/httpd/dummy-host.example.com-error_log"
-    CustomLog "/var/log/httpd/dummy-host.example.com-access_log" common
 </VirtualHost> 
     
 <VirtualHost *:443>
     DocumentRoot "/var/www/html"
     ServerName system1.group8.example.com
-    ErrorLog "/var/log/httpd/dummy-host2.example.com-error_log"
-    CustomLog "/var/log/httpd/dummy-host2.example.com-access_log" common
 </VirtualHost>
 
 [root@system1 conf.d]# vim /etc/httpd/conf.d/ssl.conf 
 
  <-- find following command
- 
+
   SSLEngine on        
     SSLCertificateFile /etc/pki/tls/certs/server0.crt
     SSLCertificateKeyFile /etc/pki/tls/private/system1.key
+
+
+
+{   第十四题：
+	配置虚拟主机
+
+在 system1 上扩展您的web服务器，为站点 http://www8.group8.example.com 创建一个虚拟主机，然后执行下述步骤：
+
+设置 DocumentRoot 为 /var/www/virtual
+
+从 http://server.group8.example.com/pub/www8.html 下载文件重名为 index.html ,不要对文件 index.html 的内容做任何修改
+
+将文件 index.html 放到虚拟主机的 DocumentRoot 目录下
+
+确保 andy 用户能够在 /var/www/virtual 目录下创建文件
+注意：原站点 http://system1.group8.example.com 必须仍然能够访问，名称服务器 server.group8.example.com 已经提供对主机名 www8.group8.example.com 的域名解析
+
+}
+
+[root@system1 ~]# mkdir -p /var/www/virtual
+
+[root@system1 virtual]# semanage fcontext -a -t "httpd_sys_content_t" '/var/www(/virtual.*)?' 
+
+[root@system1 virtual]# restorecon -RFv /var/www/virtual/
+
+[root@system1 ~]# cd /var/www/virtual/
+
+[root@system1 virtual]# wget -O index.html http://server.group8.example.com/pub/www8.html
+
+[root@system1 virtual]# vim /etc/httpd/conf.d/httpd-vhosts.conf 
+
+	<VirtualHost *:80>
+    DocumentRoot "/var/www/virtual"
+    ServerName www8.group8.example.com
+
+
+{
+	第十五题
+	配置 web 内容的访问
+在您的 system1 上的 web 服务器的 DocumentRoot 目录下，创建一个名为 private 的目录，要求如下：
+从 http://server.group8.example.com/pub/private.html 下载一个文件副本到这个目录，并且重命名为 index.html
+不要对这个文件的内容做任何修改
+从 system1 上，任何人都可以浏览 private 的内容，但是从其它系统不能访问这个目录的内容。
+}
+
+
+[root@system1]# mkdir /var/www/html/private
+
+[root@system1 private]# cd /var/www/html/private/
+
+[root@system1 private]# wget -O index.html http://server.group8.example.com/pub/private.html
+
+[root@system1 private]# vim /etc/httpd/conf.d/httpd-vhosts.conf 
+
+     <Directory "/var/www/html/private">
+        allowoverride none
+        require all denied
+        require local
+        </Directory>
+
+{	第十六题
+	实现动态WEB内容
+在 system1 上配置提供动态web内容，要求：
+动态内容由名为 wsgi.group8.example.com 的虚拟主机提供
+虚拟主机侦听在端口 8909
+从 http://server.group8.example.com/pub/webinfo.wsgi 下载一个脚本，然后放在适当的位置，无论如何不要求修改此文件的内容
+客户端访问 http://wsgi.group8.example.com:8909/ 时，应该接收到动态生成的web页面
+此 http://wsgi.group8.example.com:8909/ 必须能被 group8.example.com 域内的所有系统访问
+}
+
+[root@system1 ~]# yum install -y mod_wsgi
+
+[root@system1 ~]# cd /var/www/html/
+
+[root@system1 html]# wget  http://server.group8.example.com/pub/webinfo.wsgi
+
+[root@system1 conf.d]# vim httpd-vhosts.conf 
+
+	<VirtualHost *:8909>
+    ServerName wsgi.group8.example.com
+    WSGIScriptAlias / /var/www/html/webinfo.wsgi
+</VirtualHost>
+
+
+
+[root@system1 conf.d]# semanage port -a -t http_port_t -p tcp 8909
+
+调整防火墙开放8909端口
+
+ [root@system1 conf.d]# firewall-cmd --permanent --add-rich-rule='rule family="ipv4" port port="8909" protocol="tcp" accept'
+
+[root@system1 conf.d]# firewall-cmd --reload 
+success
+
 
