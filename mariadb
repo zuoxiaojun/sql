@@ -1,0 +1,62 @@
+
+{
+	配置一个数据库
+在 system1上创建一个 Maria DB 数据库，名为 Contacts，要求：
+ 数据库应该包含来自数据库复制的内容，复制文件的URL为 http://server.group8.example.com/pub/users.mdb ，数据库只能被 localhost 访问
+ 除了 root 用户，此数据库只能被用户 Mary 查询，此用户密码为 redhat
+ root 用户的数据库密码为 redhat ，同时不允许空密码登录
+}
+[root@system1 ~]# yum install -y mariadb*
+
+[root@system1 ~]# systemctl enable mariadb.service 
+
+[root@system1 ~]# systemctl start mariadb.service 
+
+[root@system1 ~]# mysql_secure_installation 
+
+[root@system1 ~]# mysql -u root -p
+ 
+ MariaDB [(none)]> create database Contacts;
+ Query OK, 1 row affected (0.01 sec)
+
+ MariaDB [(none)]> use Contacts;
+ Database changed
+ MariaDB [Contacts]> source /root/users.mdb
+ MariaDB [Contacts]> show tables;
++--------------------+
+| Tables_in_Contacts |
++--------------------+
+| u_loc              |
+| u_name             |
+| u_passwd           |
++--------------------+
+3 rows in set (0.00 sec)
+
+MariaDB [Contacts]> grant select on Contacts.* to  Mary@localhost identified by 'redhat';
+Query OK, 0 rows affected (0.01 sec)
+ 
+MariaDB [Contacts]> flush privileges;
+Query OK, 0 rows affected (0.00 sec)
+
+
+数据库查询
+在 system1 上使用数据库 Contacts ，并使用相应的 SQL 查询以回答下列问题：
+
+ 密码是fadora 的人的名字是什么？
+
+ 有多少人的姓名是 John ，同时居住在 Santa Clara ？
+
+
+MariaDB [Contacts]> select a.firstname from u_name a left join u_passwd b on a.userid=b.uid where b.password='fadora';
+
+
+MariaDB [Contacts]> select * from u_name a left join u_loc b on a.userid = b.uid where a.firstname='John'and b.location='Santa Clara'; 
++--------+-----------+-------------+-----+-------------+
+| userid | firstname | lastname    | uid | location    |
++--------+-----------+-------------+-----+-------------+
+|      8 | John      | Clinton     |   8 | Santa Clara |
+|     15 | John      | Clinton     |  15 | Santa Clara |
+|     21 | John      | Jackson     |  21 | Santa Clara |
+|     24 | John      | Walker Bush |  24 | Santa Clara |
++--------+-----------+-------------+-----+-------------+
+4 rows in set (0.00 sec)

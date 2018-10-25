@@ -1,0 +1,30 @@
+--根据合同号修改客户性质
+
+/*查询客户性质*/
+select code, name, pk_defdoc
+  from bd_defdoc
+ where pk_defdoclist =
+       (select pk_defdoclist from bd_defdoclist where name = '客户性质')
+
+/*受托开发可全部修改为重点客户*/
+
+update ct_sale
+   set vdef4 = '1001D1100000009IN33I'
+ where vdef4 = '1001D1100000009IN33D'
+
+
+/*按照合同号更新*/
+
+create table htxz (
+vbillcode varchar(40),
+vdef4  varchar(101) 
+)
+
+select * from htxz
+
+update ct_sale a
+   set a.vdef4 =
+       (select b.vdef4 from htxz b where a.vbillcode = b.vbillcode)
+ where exists (select * from htxz b where a.vbillcode = b.vbillcode)
+ and blatest ='Y'
+

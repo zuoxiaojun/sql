@@ -85,7 +85,7 @@ success
  <-- find following command
 
   SSLEngine on        
-    SSLCertificateFile /etc/pki/tls/certs/server0.crt
+    SSLCertificateFile /etc/pki/tls/certs/system1.crt
     SSLCertificateKeyFile /etc/pki/tls/private/system1.key
 
 
@@ -107,6 +107,8 @@ success
 }
 
 [root@system1 ~]# mkdir -p /var/www/virtual
+
+[root@system1 ~]# setfacl -m u:andy:rwx /var/www/virtual/
 
 [root@system1 virtual]# semanage fcontext -a -t "httpd_sys_content_t" '/var/www(/virtual.*)?' 
 

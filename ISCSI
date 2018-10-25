@@ -67,4 +67,12 @@ iscsiadm --mode node --targetname iqn.2001-05.com.doe:test --portal 192.168.1.1:
 
 [root@system2 iscsi]# iscsiadm --mode node --targetname iqn.2014-08.com.example.group8:system1 --portal 172.24.8.11:3260 --login
 
+[root@system2 ~]# fdisk /dev/sdb
 
+[root@system2 ~]# mkfs.ext4 /dev/sdb1
+
+[root@system2 ~]# mkdir /mnt/data
+
+[root@system2 ~]# vim /etc/fstab 
+
+	UUID=429e341e-85f1-4eaa-82a1-9cf13c271022 /mnt/data ext4 defaults,_netdev 0  0
