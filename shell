@@ -40,7 +40,7 @@ esac
 [root@system1 ~]# vim batchusers.sh
 
 #! /bin/bash
-# !/bin/bash
+
 if [ $# -eq 0 ];then
 echo 'Usage: /root/batchusers userfile'
 exit 1

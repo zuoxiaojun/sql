@@ -11,9 +11,6 @@
 }
 
 
-
-
-
 {
 	在 system2 上挂载一个来自 system1.group8.example.com 的NFS共享,并符合下列要求：
 /public 挂载在下面的目录上 /mnt/nfsmount

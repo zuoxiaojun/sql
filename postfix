@@ -1,0 +1,19 @@
+
+{
+	配置本地邮件服务
+
+在系统 system2 和system1 上配置邮件服务，要求：
+这些系统不接受外部发送来的邮件
+在这些系统上本地发送的任何邮件都会自动路由到mail.group8.example.com
+从这些系统上发送的邮件显示来自于server.group8.example.com
+您可以通过发送邮件到本地用户 dave 来测试您的配置,系统 server.group8.example.com 已经配置把此用户的邮件转到URL http://server.group8.example.com/pub/received_mail/8
+
+}
+
+postconf -e inet_interfaces=loopback-only
+postconf -e local_transport=error:err
+postconf -e relayhost=[mail.group8.example.com]
+postconf -e myorigin=server.group8.example.com
+
+echo "hello" | mail -s testmail dave
+curl http://server.group8.example.com/pub/received_mail/8

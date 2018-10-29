@@ -1,8 +1,8 @@
-/*é‡‡è´­åˆåŒä»˜æ¬¾ç”³è¯·æ ¡éªŒå‘ç¥¨é‡‘é¢ï¼Œæ•°æ®åº“å–å€¼é€»è¾‘  */
+/*²É¹ººÏÍ¬¸¶¿îÉêÇëĞ£Ñé·¢Æ±½ğ¶î£¬Êı¾İ¿âÈ¡ÖµÂß¼­  */
 
      select pk_ct_pu
           from ct_pu
-         where vbillcode = 'GCL/FNJC-CG-2016-0207' and blatest ='Y';  --1001D1100000000S6ENN          åˆåŒä¸»é”®
+         where vbillcode = 'GCL/FNJC-CG-2016-0207' and blatest ='Y';  --1001D1100000000S6ENN          ºÏÍ¬Ö÷¼ü
 
 
 select sum(ntaxmny)
@@ -21,7 +21,7 @@ select sum(ntaxmny)
               (select pk_order
                  from po_order
                 where vbillcode in ('41501CD20170102002',
-               '41501CD20161222001','41501CD20160919007')) for update; --41501CD20161222001  é‡‡è´­è®¢å•æ¥æºå•æ®
+               '41501CD20161222001','41501CD20160919007')) for update; --41501CD20161222001  ²É¹º¶©µ¥À´Ô´µ¥¾İ
 
 
 
@@ -31,8 +31,8 @@ select ccontractid
                       from po_order
                      where vbillcode in ('41501CD20170102002',
                                          '41501CD20161222001',
-                                         '41501CD20160919007'))   --åˆåŒä¸»é”®    1001D1100000000S6ENN
-   --for update                                           --é‡‡è´­è®¢å•è¡¨ä½“åˆåŒä¸»é”®ï¼ˆå¼€å‘ä¸»è¦å–å€¼å­—æ®µï¼‰
+                                         '41501CD20160919007'))   --ºÏÍ¬Ö÷¼ü    1001D1100000000S6ENN
+   --for update                                           --²É¹º¶©µ¥±íÌåºÏÍ¬Ö÷¼ü£¨¿ª·¢Ö÷ÒªÈ¡Öµ×Ö¶Î£©
 
 
 
@@ -43,10 +43,10 @@ select sum(ntaxmny)
           from po_order_b
          where ccontractid in (select pk_ct_pu
                                  from ct_pu
-                                where vbillcode = 'GCL/FNJC-CG-2016-0207'
+                                where vbillcode = 'GCL/DSWF-QT-20170091ºÅ'
                                   and blatest = 'Y')
            and dr = 0)
-   and dr = 0 --å–åˆåŒå¯¹åº”çš„å‘ç¥¨æ€»é‡‘é¢
+   and dr = 0 --È¡ºÏÍ¬¶ÔÓ¦µÄ·¢Æ±×Ü½ğ¶î
 
 
 
