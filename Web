@@ -166,11 +166,12 @@ success
 [root@system1 html]# wget  http://server.group8.example.com/pub/webinfo.wsgi
 
 [root@system1 conf.d]# vim httpd-vhosts.conf 
-
+	
+	Listen 8909
 	<VirtualHost *:8909>
     ServerName wsgi.group8.example.com
     WSGIScriptAlias / /var/www/html/webinfo.wsgi
-</VirtualHost>
+   </VirtualHost>
 
 
 

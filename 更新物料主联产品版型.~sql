@@ -2,17 +2,20 @@
 select pk_material, code, name
   from bd_material_v
  where pk_marbasclass in
-       (select pk_marbasclass from bd_marbasclass where name = '成本对象类')
+       (select pk_marbasclass from bd_marbasclass where name = '成本对象类')--1001D110000000D983QX
 
---创建主联产品更新表
+--创建版型更新表
 create table zlbx (
 code varchar2(100),
 name varchar2(100),
-zlpk   varchar2(100)
+zlpk   varchar2(100),--主联
+zlname varchar2(100),
+zjpk  varchar2(100),--组件
+zjname varchar2(100)
 )
 
-select  * from  zlbx
-truncate table zlbx
+select  * from  zlbx where code='0105021316'
+
 
 --更新def2为主联版型
 update bd_material a
@@ -25,9 +28,17 @@ update bd_material_v a
        (select b.zlpk from zlbx b where a.code = b.code)
  where exists (select 1 from zlbx b where a.code = b.code)
 
+--更新def1为产品组件版型
 
-select def1,def2 from bd_material  where code='0105010217';
-select def1,def2 from bd_material_v  where code='0105010217';
+update bd_material a
+   set a.def1 =
+       (select b.zjpk from zlbx b where a.code = b.code)
+ where exists (select 1 from zlbx b where a.code = b.code);
+
+update bd_material_v a
+   set a.def1 =
+       (select b.zjpk from zlbx b where a.code = b.code)
+ where exists (select 1 from zlbx b where a.code = b.code)
 
 
 
