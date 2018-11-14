@@ -12,5 +12,5 @@ select pk_bankaccbas,
 
 select code, name, accnum, accname
   from bd_bankaccsub
- where pk_bankaccbas = '1001D110000000CA3YIB'
+ where pk_bankaccbas = '1001D110000000CKUFDQ'
    for update

@@ -44,7 +44,7 @@ common 必须是可以浏览的
 
   
 7、启动服务
-	systemctl restart smb.service 
+	systemctl restart smb.service
 	systemctl restart nmb.service
 
 8、测试
