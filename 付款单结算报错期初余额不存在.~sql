@@ -1,7 +1,6 @@
-
 select pk_account, init_primal
   from cmp_initdata
- where pk_account = '1001D110000000C5PVE5' --查询期初余额
+ where pk_account = '1001B110000000016097' --查询期初余额
 
 
 select payaccount
@@ -19,5 +18,3 @@ select payaccount
             from cmp_settlement
            where billcode = '80501FK18040006') --for update  结算信息表体银行账户
  
- 
-

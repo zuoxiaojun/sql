@@ -4,7 +4,7 @@ select billno, def2
   from ar_gatherbill
  where def2 = '~'
    and dr = 0
-   and billstatus <> '-99' --非暂存态
+   and billstatus <> '-99'
 --资金接口数据传输表头对应客户丢失
 
 

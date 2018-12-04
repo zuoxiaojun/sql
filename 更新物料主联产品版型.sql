@@ -45,10 +45,32 @@ update bd_material_v a
 
 
 
+select a.def1, a.def2, 
+b.def1   bdef1, 
+b.def2   bdef2
+  from bd_material a
+  left join bd_material_v b
+    on a.code = b.code
+
+select code from (
+select a.code,a.def1, a.def2, 
+b.def1   bdef1, 
+b.def2   bdef2
+  from bd_material a
+  left join bd_material_v b
+    on a.code = b.code)
+where def2<>bdef2
 
 
-
-
-
-
-
+update bd_material_v a
+   set a.def1 =
+       (select b.def1 from bd_material b where a.code = b.code)
+ where exists
+ (select 1 from bd_material b where a.code = b.code)
+   and a.code in
+       (select code
+          from (select a.code, a.def1, a.def2, b.def1 bdef1, b.def2 bdef2
+                  from bd_material a
+                  left join bd_material_v b
+                    on a.code = b.code)
+         where def1 <> bdef1)

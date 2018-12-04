@@ -2,7 +2,7 @@
 select pk_material, code, name
   from bd_material_v
  where pk_marbasclass in
-       (select pk_marbasclass from bd_marbasclass where name = '成本对象类')--1001D110000000D983QX
+       (select pk_marbasclass from bd_marbasclass where name = '成本对象类')
 
 --创建版型更新表
 create table zlbx (
@@ -14,8 +14,8 @@ zjpk  varchar2(100),--组件
 zjname varchar2(100)
 )
 
-select  * from  zlbx where code='0105021316'
-
+select  * from  zlbx 
+--truncate table zlbx
 
 --更新def2为主联版型
 update bd_material a

@@ -6,7 +6,7 @@
 */
 select cstockorgvid, cstockorgid, cstordocid
   from ia_iibill
- where vbillcode = '81300II2018082038'
+ where vbillcode = '81300I22018110941'
 
 
 --cstockorgvid   0001B11000000000IIC6
@@ -19,7 +19,7 @@ vbillcode varchar2(255) ,
  )
  
  select * from dbck;
- 
+ truncate table dbck;
  update ia_iibill
     set cstockorgvid = '0001B11000000000IIC6',
         cstockorgid  = '0001B11000000000IIC7',
