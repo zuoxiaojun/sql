@@ -1,1 +1,1 @@
-select bsc  from ct_pu where vbillcode ='GCL/XXJC-QT-2018-263' for update 
+select bsc  from ct_pu where vbillcode ='GCLXXJC-QT(F)-2018-205' for update 

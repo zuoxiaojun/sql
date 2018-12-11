@@ -1,4 +1,4 @@
-
+--模块汇总视图
 create or replace view v_rzb_all as (
 select * from v_rzb_cdm_contract  --融资表-银行贷款合同
 union all
