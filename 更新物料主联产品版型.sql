@@ -44,14 +44,9 @@ update bd_material_v a
 
 
 
+/*更新物料与物料版本主联版型数据一致*/
 
-select a.def1, a.def2, 
-b.def1   bdef1, 
-b.def2   bdef2
-  from bd_material a
-  left join bd_material_v b
-    on a.code = b.code
-
+--查询出不相同的数据
 select code from (
 select a.code,a.def1, a.def2, 
 b.def1   bdef1, 

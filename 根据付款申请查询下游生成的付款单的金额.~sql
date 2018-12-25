@@ -7,8 +7,11 @@ select billno, sum(money_de)
          where pk_apply in
                (select pk_apply
                   from cmp_apply
-                 where vbillno ='SS19012506'
+                 where vbillno ='SS18052470'
                    and dr = '0'
-                   and pk_acceptorg = '0001B11000000000T16G'))
+                   and pk_acceptorg = '0001B110000000007JO0'))--财务组织
    and dr = '0'
- group by billno
+ group by billno;
+
+
+select  pk_financeorg  from org_financeorg where code ='809'
