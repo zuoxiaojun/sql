@@ -4,3 +4,6 @@ select accnum, accname, creationtime, creator, modifier, modifiedtime
   from bd_bankaccbas
  where modifiedtime = '2018-06-06 13:46:05'
   for update 
+
+
+
