@@ -8,7 +8,9 @@ select cstockorgvid, cstockorgid, cstordocid
  --cstockorgvid  0001B11000000000IIC6 
  --cstockorgid   0001B11000000000IIC7  库存组织
  --cstordocid    1001B11000000002IGHT   原辅料-自采-正常
- select * from dbck;
+ --                     1001B11000000002IGM0  自产成品
+ 
+ select * from dbck  ;
 truncate table dbck
 --采购入库单
 
@@ -24,5 +26,50 @@ where vbillcode in (select vbillcode from dbck );
      set cstockorgvid = '0001B11000000000IIC6',
          cstockorgid  = '0001B11000000000IIC7',
          cstordocid='1001B11000000002IGHT'
-   where vbillcode in (select vbillcode from dbck ) 
+   where vbillcode in (select vbillcode from dbck where ck='原辅料-自采-正常') 
    and dr ='0'
+
+
+--调拨入库单
+
+select cstockorgvid, cstockorgid, cstordocid
+  from ia_iibill
+ where vbillcode = '81300II2018121434';
+ 
+update ia_iibill set cstockorgvid = '0001B11000000000IIC6',
+         cstockorgid  = '0001B11000000000IIC7',
+         cstordocid ='1001B11000000002IGM0'
+         where vbillcode in (select vbillcode from dbck where ck='自产成品')
+         and dr='0'
+  
+    update ia_detailledger
+     set cstockorgvid = '0001B11000000000IIC6',
+         cstockorgid  = '0001B11000000000IIC7',
+         cstordocid='1001B11000000002IGM0'
+   where vbillcode in (select vbillcode from dbck where ck='自产成品') 
+   and dr ='0'
+
+--调拨出库单
+
+update ia_ijbill set cstockorgvid = '0001B11000000000IIC6',
+         cstockorgid  = '0001B11000000000IIC7',
+         cstordocid ='1001B11000000002IGHT'
+         where vbillcode in (select vbillcode from dbck where ck='原辅料-自采-正常')
+         and dr='0'
+
+   update ia_detailledger
+     set cstockorgvid = '0001B11000000000IIC6',
+         cstockorgid  = '0001B11000000000IIC7',
+         cstordocid='1001B11000000002IGHT'
+   where vbillcode in (select vbillcode from dbck where ck='原辅料-自采-正常') 
+   and dr ='0'
+
+
+
+
+
+
+
+
+
+

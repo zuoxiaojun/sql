@@ -7,7 +7,7 @@
       
       select corigcurrencyid, vbillcode, dr
         from to_settlelist
-       where corigcurrencyid = '~'  for update 
+       where corigcurrencyid = '~'  
        
        
        select distinct(corigcurrencyid) from to_settlelist 

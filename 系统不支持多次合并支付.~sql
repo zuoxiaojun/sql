@@ -13,4 +13,4 @@ delete from cmp_payment
  where pk_settlement =
        (select pk_settlement
           from cmp_settlement
-         where billcode = '80501BX18100212');
+         where billcode = '81300BX18120197');

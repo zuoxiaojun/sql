@@ -34,6 +34,6 @@ select * from bd_bankaccbas where   pk_bankaccbas ='1001B1100000000160DS'
 
 
 
-
+select pk_entity from bd_accass where 
 
 
