@@ -1,0 +1,20 @@
+--ÐÞ¸ÄºËÏúÓà¶î±í
+
+select *
+  from gl_voucher
+ where pk_accountingbook = (select pk_accountingbook
+                              from org_accountingbook
+                             where code = '80501-XXJC')
+   and year = 2018
+   and period = 03
+   and num = 90   --1001D1100000009P33CB
+and PK_VOUCHER='1001D1100000009P33CB'
+
+
+select *
+  from gl_verifydetail
+ where pk_detail in
+       (select pk_detail
+          from gl_detail
+         where PK_VOUCHER = '1001D1100000009P33CB')
+   for update

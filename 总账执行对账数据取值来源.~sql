@@ -18,21 +18,15 @@ update arap_tally
 
 select pk_billtype,pk_currtype ,pk_tradetypeid  from ap_payablebill where billno ='82500YF18110084' --1001D11000000091JS53
 
-
 --查询出arap_tally中与应付单上币种不符合数据
-select pk_currtype,code,name from bd_currtype  where name in ('人民币','美元','欧元');
-
 select distinct(billno)
   from arap_tally
  where billno in (select billno
                     from ap_payablebill
-                   where pk_currtype = '1002Z0100000000001K8'--美元
+                   where pk_currtype = '1002Z0100000000001K8'
                      and pk_tradetypeid = '1001D11000000091JS53'
                      and dr = 0)
-   and pk_currtype = '1002Z0100000000001K1'--人民币
-
-
-
+   and pk_currtype = '1002Z0100000000001K1'
 
 --更新币种
 update arap_tally

@@ -10,17 +10,17 @@ select pk_apply,
        olcunpaysum, --未付金额合计(组织本币)
        unpaysum --未付金额合计
   from cmp_apply
- where vbillno = 'SS18086276'
-   for update --1001D110000000CCW1AL
+ where vbillno = 'SS16016243'
+   for update --1001D110000000CAUZJD
  
  select paymny, --累计付款金额
         olcpaymny, --累计付款金额 组织本币
-        gllcapplymny,--申请付款金额(全局本币)
+        gllcapplymny, --申请付款金额(全局本币)
         dr,
-        glcunpaymny ,--未付
-        gllcunpaymny ,
-        olcunpaymny ,
-        unpaymny 
+        glcunpaymny, --未付
+        gllcunpaymny,
+        olcunpaymny,
+        unpaymny
    from cmp_apply_b
-  where pk_apply = '1001D110000000CCW1AL'
+  where pk_apply = '1001D110000000CAUZJD'
     for update
