@@ -12,4 +12,4 @@ select debitamount, --原币借方金额
  where nov = '127' --凭证号
    and detailindex = '75' --行号
    and explanation = '支付5月职工工资'
-   for update
+  -- for update
