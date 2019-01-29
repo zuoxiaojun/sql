@@ -18,9 +18,13 @@ update po_order_b
 update po_order_b
    set bpayclose = 'N'
  where pk_org =
-       (select pk_purchaseorg from org_purchaseorg where code = '815')
+      (select pk_purchaseorg from org_purchaseorg where code = '815')
    and bpayclose = 'Y'
    and substr(dbilldate, 1, 4) = '2018'
+   
+   --订单付款关闭全部打开 
+ update po_order_b set bpayclose = 'N' where bpayclose = 'Y'
+  
    
    --订单最终关闭打开
    update po_order
@@ -30,5 +34,7 @@ update po_order_b
       and bfinalclose = 'Y'
       and substr(dbilldate, 1, 4) = '2017'
 
+   --订单最终关闭全部打开
+   update po_order set bfinalclose = 'N' where  bfinalclose = 'Y'
 
 
