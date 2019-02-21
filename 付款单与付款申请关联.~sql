@@ -2,12 +2,12 @@
 --付款单与付款申请关联
 select CONTRACTNO, TOP_BILLID, TOP_BILLTYPE, TOP_ITEMID, TOP_TERMCH
   from ap_payitem
- where billno = '80200FK19020027'
+ where billno = '80100FK19020047'
    and dr = 0
    for update
      ;
    
    select CONTRACTNO, TOP_BILLID, TOP_BILLTYPE, TOP_ITEMID, TOP_TERMCH
   from ap_payitem
- where billno = '80200FK19010090'
+ where billno = '80100FK19020046'
    and dr = 0
