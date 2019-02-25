@@ -1,6 +1,6 @@
 
 
-select count(*) from user_objects where object_name like '%TEMQ%' and OBJECT_TYPE='TABLE'
+select count(*) from user_objects where object_name  like '%TEMQ%' and OBJECT_TYPE='TABLE'
 
 
 select count(*) from user_objects where OBJECT_TYPE='TABLE'--总表
@@ -12,4 +12,7 @@ select segment_name, bytes
  where segment_type = 'TABLE'
    and segment_name like '%TEMQ%'  --表大小
 
-
+select 'drop table ' || object_name || ';'
+  from user_objects
+ where object_name like '%TEMQ%'
+   and OBJECT_TYPE = 'TABLE' and substr(TIMESTAMP,1,7)='2018-01'

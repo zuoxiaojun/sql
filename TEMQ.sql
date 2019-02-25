@@ -1,5 +1,5 @@
 
-
+--查询TEMQ表的个数
 select count(*) from user_objects where object_name  like '%TEMQ%' and OBJECT_TYPE='TABLE'
 
 

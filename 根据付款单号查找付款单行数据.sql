@@ -9,5 +9,5 @@ select pk_subjcode,
   from ap_payitem
  where pk_paybill =
        (select pk_paybill from ap_paybill where billno = '81500FK18060023' and dr =0)
-   for update
+  -- for update
 
