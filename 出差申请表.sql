@@ -1,1 +1,3 @@
-select * from GCL_EHR_CUX_HR2FIN_TMGF where vbillno ='1'  --³ö²îÉêÇë
+select *
+  from gcl_ehr_cux_hr2fin_tmgf
+ where vbillno = '0000124755' --³ö²îÉêÇë
