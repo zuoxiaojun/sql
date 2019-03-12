@@ -8,15 +8,15 @@ select name, a
 
 select pk_cust_sup, code, name
   from bd_cust_supplier
- where name = '江苏亿和新材料有限公司'; --客商信息
+ where name = 'GINO Technology Co., Ltd'; --客商信息
 
 select pk_supplier, code, name, iscustomer, corcustomer
   from bd_supplier
- where name = '舒城县招投标监督管理局'; --供应商基本信息
+ where name = 'GINO Technology Co., Ltd'; --供应商基本信息  --1001D1100000000TS3CM
 
 select pk_customer, code, name，pk_supplier
   from bd_customer
- where name = '舒城县招投标监督管理局'; --客户基本信息
+ where name = 'GINO Technology Co., Ltd'; --客户基本信息  --1001D110000000CH03KN
         
         
         
