@@ -15,5 +15,6 @@ merge into bd_bankdoc a
 using bd_asslinenum b
 on (a.name = b.name)
 when matched then
-  update set a.code = b.code 
+  update set a.code = b.code
+  where a.code<>b.code 
  --where a.code = '001auto1tpm4kua'
