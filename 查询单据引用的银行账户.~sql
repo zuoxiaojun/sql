@@ -208,7 +208,3 @@ select '贷款合同申请子表', PK_CONTRACT, PK_CREDITDEDUCTION, PK_BANK --授信银行
   from cdm_creditReduce
  where PK_BANK in (select pk_bankdoc from v_bank_nolen_12)
 
-
---
-select * from cdm_payrcpt where vbillno ='36FE17050004'
-

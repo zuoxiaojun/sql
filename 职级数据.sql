@@ -1,0 +1,2 @@
+select * from EHR_SYNONYMS_CUX_HR2ZJ_TM
+
