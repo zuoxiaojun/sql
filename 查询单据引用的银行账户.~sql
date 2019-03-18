@@ -1,10 +1,6 @@
 
 --银行编码长度不等于12位的银行档案
-create or replace view v_bank_nolen_12 as 
-select code, name, pk_bankdoc from bd_bankdoc where length(code) <> 12
-
-select *  from v_bank_nolen_12
-
+/*create or replace view v_bank_nolen_12 as */
 
 /*查询单据引用的银行账户*/
 --select count(*) from cc_bankprotocol where dr=0
@@ -12,21 +8,23 @@ select *  from v_bank_nolen_12
 --企业授信协议
 select '企业授信协议',
        'cc_bankprotocol',
-       protocolcode     vbillcode,
-       pk_bankprotocol  pk_bill,
+       protocolcode,
+       'pk_bankprotocol',
+       pk_bankprotocol,
        'pk_creditbank',
-       pk_creditbank     --银行
-  from cc_bankprotocol 
+       pk_creditbank --银行
+  from cc_bankprotocol
  where pk_creditbank in (select pk_bankdoc from v_bank_nolen_12)
    and dr = 0
 union all
 --担保物权
 select '担保物权管理',
        'gpm_guaproperty',
-       pledgeno         vbillcode,
-       pk_guaproperty   pk_bill,
+       pledgeno,
+       'pk_guaproperty',
+       pk_guaproperty,
        'vdef4',
-       vdef4             --质权人（银行）
+       vdef4 --质权人（银行）
   from gpm_guaproperty
  where vdef4 in (select pk_bankdoc from v_bank_nolen_12)
    and dr = 0
@@ -34,10 +32,11 @@ union all
 --担保合同
 select '担保合同',
        'gpm_guacontract',
-       contractno       vbillcode,
-       pk_guacontract   pk_bill,
+       contractno,
+       'pk_guacontract',
+       pk_guacontract,
        'creditorba',
-       creditorba        --债权人（银行）
+       creditorba --债权人（银行）
   from gpm_guacontract
  where creditorba in (select pk_bankdoc from v_bank_nolen_12)
 
@@ -46,28 +45,32 @@ union all
 --票据登记 
 select '票据登记-收款银行',
        'fbm_register',
-       fbmbillno          vbillcode,
-       pk_register        pk_bill,
+       fbmbillno,
+       'pk_register',
+       pk_register,
        'hidereceivebank',
-       hidereceivebank     --收款银行 
+       hidereceivebank --收款银行 
   from fbm_register
  where hidereceivebank in (select pk_bankdoc from v_bank_nolen_12)
    and dr = 0
 union all
 select '票据登记-付款银行',
        'fbm_register',
-       fbmbillno          vbillcode,
-       pk_register        pk_bill,
+       fbmbillno,
+       'pk_register',
+       pk_register,
        'hidepaybank',
-       hidepaybank         --付款银行 
+       hidepaybank --付款银行 
   from fbm_register
  where hidepaybank in (select pk_bankdoc from v_bank_nolen_12)
    and dr = 0
 union all
 --银行托管，银行领用
 select '银行托管&&银行领用',
-       'fbm_storage' ,vbillno ,
-       pk_storage pk_bill,
+       'fbm_storage',
+       vbillno,
+       'pk_storage',
+       pk_storage,
        'pk_bankdoc',
        pk_bankdoc --受托银行
   from fbm_storage
@@ -77,42 +80,53 @@ union all
 --银行托收
 select '银行托收',
        'fbm_consignbank',
-       vbillno          vbillcode,
-       pk_consignbank   pk_bill,
+       vbillno,
+       'pk_consignbank',
+       pk_consignbank,
        'pk_holderbank',
-       pk_holderbank     --托收银行
+       pk_holderbank --托收银行
   from fbm_consignbank
  where pk_holderbank in (select pk_bankdoc from v_bank_nolen_12)
 union all
 --贴现申请
 select '贴现申请&&贴现办理',
        'fbm_discount',
-       vbillno             vbillcode,
-       pk_discount         pk_bill,
+       vbillno,
+       'pk_discount',
+       pk_discount,
        'pk_discount_bank',
-       pk_discount_bank     --贴现银行
+       pk_discount_bank --贴现银行
   from fbm_discount
  where pk_discount_bank in (select pk_bankdoc from v_bank_nolen_12)
 union all
 --票据质押
-select '票据质押', 'fbm_impawn', vbillno, pk_impawn, 
-'impawnbank',
-impawnbank --质押银行
+select '票据质押',
+       'fbm_impawn',
+       vbillno,
+       'pk_impawn',
+       pk_impawn,
+       'impawnbank',
+       impawnbank --质押银行
   from fbm_impawn
  where impawnbank in (select pk_bankdoc from v_bank_nolen_12)
 union all
 --开票申请
-select '开票申请', 'cfbm_sign_apply', vbillno, pk_sign_apply, 
-'signapplybank',
-signapplybank --开票银行
+select '开票申请',
+       'cfbm_sign_apply',
+       vbillno,
+       'pk_sign_apply',
+       pk_sign_apply,
+       'signapplybank',
+       signapplybank --开票银行
   from cfbm_sign_apply
  where signapplybank in (select pk_bankdoc from v_bank_nolen_12)
 union all
 --票据签发-付款银行
 select '票据签发-付款银行',
        'fbm_register',
-       fbmbillno          vbillcode,
-       pk_register        pk_bill,
+       fbmbillno,
+       'pk_register',
+       pk_register,
        'hidepaybank',
        hidepaybank --付款银行 
   from fbm_register
@@ -123,8 +137,9 @@ union all
 --票据签发-收款银行
 select '票据登记-收款银行',
        'fbm_register',
-       fbmbillno          vbillcode,
-       pk_register        pk_bill,
+       fbmbillno,
+       'pk_register',
+       pk_register,
        'hidereceivebank',
        hidereceivebank --收款银行 
   from fbm_register
@@ -134,8 +149,9 @@ union all
 --票据签发-授信银行
 select '票据登记-授信银行',
        'fbm_register',
-       fbmbillno          vbillcode,
-       pk_register        pk_bill,
+       fbmbillno,
+       'pk_register',
+       pk_register,
        'ccbank',
        ccbank --授信银行 
   from fbm_register
@@ -145,9 +161,13 @@ select '票据登记-授信银行',
    and ccbank <> '~'
 union all
 --票据付款
-select '票据付款', 'fbm_accept', vbillno, pk_accept, 
-'ccbank',
-ccbank --授信银行
+select '票据付款',
+       'fbm_accept',
+       vbillno,
+       'pk_accept',
+       pk_accept,
+       'ccbank',
+       ccbank --授信银行
   from fbm_accept
  where ccbank in (select pk_bankdoc from v_bank_nolen_12)
 union all
@@ -155,6 +175,7 @@ union all
 select '开证申请-开证行',
        'lcm_apply',
        vbillno,
+       'pk_apply',
        pk_apply,
        'pk_bank_issuing',
        pk_bank_issuing --开证行
@@ -165,6 +186,7 @@ union all
 select '开证申请-付款银行',
        'lcm_apply',
        vbillno,
+       'pk_apply',
        pk_apply,
        'pk_bank_nego',
        pk_bank_nego --付款银行
@@ -175,6 +197,7 @@ union all
 select '开证登记-开证行',
        'lcm_openregister',
        vbillno,
+       'pk_register',
        pk_register,
        'pk_bank_issuing',
        pk_bank_issuing --开证行
@@ -185,6 +208,7 @@ union all
 select '开证登记-付款银行',
        'lcm_openregister',
        vbillno,
+       'pk_register',
        pk_register,
        'pk_bank_nego',
        pk_bank_nego --付款银行 
@@ -196,6 +220,7 @@ union all
 select '到单承付',
        'lcm_arrival',
        vbillno,
+       'pk_arrival',
        pk_arrival,
        'pk_openbank',
        pk_openbank --开证行
@@ -214,6 +239,7 @@ union all
 select '收证登记-通知行',
        'lcm_receiveregister',
        vbillno,
+       'pk_receiptregister',
        pk_receiptregister,
        'pk_advisingbank',
        pk_advisingbank --通知行
@@ -224,6 +250,7 @@ union all
 select '收证登记-通知行',
        'lcm_receiveregister',
        vbillno,
+       'pk_receiptregister',
        pk_receiptregister,
        'pk_receivebank',
        pk_receivebank --收证行
@@ -234,6 +261,7 @@ union all
 select '收证登记-议付行',
        'lcm_receiveregister',
        vbillno,
+       'pk_receiptregister',
        pk_receiptregister,
        'pk_negotiatedbank',
        pk_negotiatedbank --议付行
@@ -244,6 +272,7 @@ union all
 select '交单登记',
        'lcm_submissionregister',
        vbillno,
+       'pk_submissionregister',
        pk_submissionregister,
        'pk_receivebank',
        pk_receivebank --收单银行
@@ -254,6 +283,7 @@ union all
 select '通知收款',
        'lcm_collectionnotice',
        vbillno,
+       'pk_collectionnotice',
        pk_collectionnotice,
        'pk_receivebank', --收单银行
        pk_receivebank
@@ -265,6 +295,7 @@ union all
 select '银行贷款合同申请-贷款银行',
        'cdm_apply',
        applycode,
+       'pk_apply',
        pk_apply,
        'pk_creditbank',
        pk_creditbank --贷款银行
@@ -277,6 +308,7 @@ union all
 select '银行贷款合同申请-受托银行',
        'cdm_apply',
        applycode,
+       'pk_apply',
        pk_apply,
        'pk_consignbank',
        pk_consignbank --受托银行
@@ -288,6 +320,7 @@ union all
 select '银行贷款合同',
        'cdm_contract',
        contractcode,
+       'pk_contract',
        pk_contract,
        'pk_creditbank',
        pk_creditbank --贷款银行 
@@ -299,6 +332,7 @@ union all
 select '贷款合同申请子表',
        'cdm_creditReduce',
        PK_CONTRACT,
+       'PK_CREDITDEDUCTION',
        PK_CREDITDEDUCTION,
        'PK_BANK',
        PK_BANK --授信银行
@@ -328,6 +362,7 @@ union all
 select '开函申请',
        'bgm_openapply',
        vbillno,
+       'pk_openapply',
        pk_openapply,
        'pk_guaranteebank',
        pk_guaranteebank --担保银行
@@ -339,6 +374,7 @@ union all
 select '开函登记',
        'bgm_openregister',
        vbillno,
+       'pk_openregister',
        pk_openregister,
        'pk_guaranteebank',
        pk_guaranteebank --担保银行
@@ -350,10 +386,9 @@ union all
 select '收函登记',
        'bgm_receiveregister',
        vbillno,
+       'pk_receiveregister',
        pk_receiveregister,
        'pk_guaranteebank',
        pk_guaranteebank --担保银行
   from bgm_receiveregister
  where pk_guaranteebank in (select pk_bankdoc from v_bank_nolen_12)
-
-

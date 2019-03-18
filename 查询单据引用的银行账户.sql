@@ -16,6 +16,19 @@ select '企业授信协议',
   from cc_bankprotocol
  where pk_creditbank in (select pk_bankdoc from v_bank_nolen_12)
    and dr = 0
+   
+   select '企业授信协议子表',
+          'CC_CREDITDETAILS',
+          PK_BANKPROTOCOL,
+          'PK_CREDITDETAILS',
+          PK_CREDITDETAILS, --单据pk
+          'def1',
+          def1 --落地机构（银行）
+     from CC_CREDITDETAILS
+    where def1 in (select pk_bankdoc from v_bank_nolen_12)
+   -- and PK_BANKPROTOCOL = '1001A41000000001TDZN'
+   
+   
 union all
 --担保物权
 select '担保物权管理',
