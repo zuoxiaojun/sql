@@ -22,9 +22,16 @@ select a.pk_bankaccbas, a.accname, a.accnum, a.pk_bankdoc, b.name
    and a.dr = 0
    and a.accclass =2  --’Àªß∑÷¿‡
    
-   
-   
   
+   
+   
+   
+   
+   
+   
+   
+   
+   
    
    
    

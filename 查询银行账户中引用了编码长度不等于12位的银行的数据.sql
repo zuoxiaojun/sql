@@ -9,6 +9,7 @@ select count(*) from bd_bankdoc  --ÒøĞĞ
 select pk_bankdoc, code, name
   from bd_bankdoc
  where length(code) <> 12
+ and enablestate =2
 
   
  
