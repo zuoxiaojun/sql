@@ -13,3 +13,8 @@ select * from pub_wf_def where  pk_wf_def ='1001D110000000ALN7Q3' --ÉóÅúÁ÷
 
 select * from org_orgs where pk_org='0001B110000000007JO0'
 
+select * from pub_wf_def where CREATEDATE='2019-03-20 17:17:16' for update 
+
+
+
+
