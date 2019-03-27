@@ -1,6 +1,6 @@
 
 --应付单本币数据查询
-select  notax_cr , local_notax_cr ,money_cr
+select  *
   from ap_payableitem
  where pk_payablebill = (select pk_payablebill
                            from ap_payablebill
