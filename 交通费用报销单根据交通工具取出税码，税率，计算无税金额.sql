@@ -1,7 +1,7 @@
 select djlxbm, djbh from er_bxzb where djlxbm = '2642'
 
 --使用表体自定义项25作为交通工具
-select distinct (defitem25 ) from er_busitem  --交通工具
+select distinct (defitem43) from er_busitem  --交通工具
 
 
 --创建交通工具与税码对照表
@@ -15,6 +15,14 @@ name_sm varchar2(200)
 
 --defitem21->getColValue(bd_taxrate, taxrate, pk_taxcode,defitem20 );
 select * from  jtbx_sm for update 
+
+/*
+
+defitem20->getcolvalue( jtbx_sm, pk_sm,name_jtgj ,defitem25 );
+defitem21->getColValue(bd_taxrate, taxrate, pk_taxcode,defitem20 );
+
+*/
+
 
 --获取交通工具档案值
 select code, name, pk_defdoc
@@ -35,6 +43,8 @@ select  code , pk_taxcode  from bd_taxcode where code like '%CN%'
 税率      defitem21
 不含税额 	defitem22
 税额     	defitem23
+7	CN22	1001D110000000GF2S2K
+9	CN16	1001D110000000A8KX79
 
 
 /*

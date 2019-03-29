@@ -18,40 +18,59 @@ select  * from  zlbx
 --truncate table zlbx
 
 --更新def2为主联版型
-update bd_material a
-   set a.def2 =
-       (select b.zlpk from zlbx b where a.code = b.code)
- where exists (select 1 from zlbx b where a.code = b.code);
 
-update bd_material_v a
+/*update bd_material a
    set a.def2 =
        (select b.zlpk from zlbx b where a.code = b.code)
- where exists (select 1 from zlbx b where a.code = b.code)
+ where exists (select 1 from zlbx b where a.code = b.code);*/
+ 
+ merge into bd_material a
+ using zlbx b
+ on a.code = b.code
+ when matched then
+   update set a.def2 = b.zlpk
+
+/*update bd_material_v a
+   set a.def2 =
+       (select b.zlpk from zlbx b where a.code = b.code)
+ where exists (select 1 from zlbx b where a.code = b.code)*/
+ 
+ merge into bd_material_v a
+ using zlbx b
+ on a.code = b.code
+ when matched then
+   update set a.def2 = b.zlpk
 
 --更新def1为产品组件版型
 
-update bd_material a
+/*update bd_material a
    set a.def1 =
        (select b.zjpk from zlbx b where a.code = b.code)
- where exists (select 1 from zlbx b where a.code = b.code);
-
+ where exists (select 1 from zlbx b where a.code = b.code);*/
+ 
+ merge into bd_material a
+ using zlbx b
+ on a.code = b.code
+ when matched then
+   update set a.def1 = b.zjpk
+   
+/*
 update bd_material_v a
    set a.def1 =
        (select b.zjpk from zlbx b where a.code = b.code)
  where exists (select 1 from zlbx b where a.code = b.code)
-
-
+*/
+ merge into bd_material_v a
+ using zlbx b
+ on a.code = b.code
+ when matched then
+   update set a.def1 = b.zjpk
 
 
 
 /*更新物料与物料版本主联版型数据一致*/
-select a.def1, a.def2, 
-b.def1   bdef1, 
-b.def2   bdef2
-  from bd_material a
-  left join bd_material_v b
-    on a.code = b.code
 
+--查询出不相同的数据
 select code from (
 select a.code,a.def1, a.def2, 
 b.def1   bdef1, 
