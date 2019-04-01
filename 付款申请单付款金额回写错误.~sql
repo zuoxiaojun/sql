@@ -5,15 +5,15 @@ select busistatus,
        olcactualpaysum, --实付金额合计(组织本币)
        olcorigapplysum, --原始付款金额合计(组织本币) 
        olcpaysum, --付款金额合计(组织本币)
-       paysum, --付款金额合计                     8819791.89
-       glcunpaysum, --未付金额合计(集团本币)      4666719.44
+       paysum, --付款金额合计                     17639530.95
+       glcunpaysum, --未付金额合计(集团本币)      488148.88
        gllcunpaysum, --未付金额合计(全局本币)
        olcunpaysum, --未付金额合计(组织本币)
        unpaysum --未付金额合计
   from cmp_apply
- where vbillno = 'SS19023402'
---and pk_apply='1001D110000000G6LLTX'
-   for update --1001D110000000ADM8W7
+ where vbillno = 'SS19023325'
+   and pk_apply = '1001D110000000FKX1OT'
+   for update --1001D110000000FKX1OT
 ;
 select paymny, --累计付款金额
        olcpaymny, --累计付款金额(组织本币)
@@ -32,5 +32,5 @@ select paymny, --累计付款金额
        olcunpaymny,
        unpaymny
   from cmp_apply_b
- where pk_apply = '1001D110000000G6LLTX'
+ where pk_apply = '1001D110000000FKX1OT'
    for update
