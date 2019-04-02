@@ -1,5 +1,5 @@
 --根据付款申请查询下游生成的付款单的金额
-select billno, sum(money_de)
+select billno, sum(money_de),sum( local_money_de)
   from ap_payitem
  where top_itemid in
        (select pk_apply_b
@@ -7,11 +7,11 @@ select billno, sum(money_de)
          where pk_apply in
                (select pk_apply
                   from cmp_apply
-                 where vbillno = 'SS18112292'
+                 where vbillno = 'SS19033413'
                    and dr = '0'
                    and pk_acceptorg = (select pk_financeorg
                                          from org_financeorg
-                                        where code = '815'))) --财务组织
+                                        where code = '801'))) --财务组织
    and dr = '0'
  group by billno;
 

@@ -18,7 +18,7 @@ select costmode, batchcost
          
          
  update bd_materialcostmod
-    set batchcost = 'N'
+    set batchcost = 'Y'
   where pk_setofbook = '1001B1100000000141DM'
     and pk_material in
         (select pk_material

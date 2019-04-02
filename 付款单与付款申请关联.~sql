@@ -2,16 +2,26 @@
 --付款单与付款申请关联
 
 --先找一条关联对照数据
- select CONTRACTNO, TOP_BILLID, TOP_BILLTYPE, TOP_ITEMID, TOP_TERMCH
+ select CONTRACTNO,
+        TOP_BILLID,
+        TOP_BILLTYPE,
+        TOP_ITEMID,
+        TOP_TERMCH,
+        local_money_de
    from ap_payitem
-  where billno = '80100FK19030111'
+  where billno = '80200FK18060046'
     and dr = 0
---1	GCL\XXJC-CG(B)-2018-0083号	1001D110000000FKX1OT	36D1	1001D110000000FKX1OU	1001B110000000016MIS
+--1	GCL/XXJC-CG-2018-0291	1001D110000000AMVUIW	36D1	1001D110000000AMVUIX	1001B110000000016MJ6	2000000.00000000
 
-
-select CONTRACTNO, TOP_BILLID, TOP_BILLTYPE, TOP_ITEMID, TOP_TERMCH --构成关联的字段
+select CONTRACTNO,
+       TOP_BILLID,
+       TOP_BILLTYPE,
+       TOP_ITEMID,
+       TOP_TERMCH,
+       local_money_de, --构成关联的字段
+       dr
   from ap_payitem
- where billno = '80100FK19030109'
+ where billno = '80200FK19030112'
    and dr = 0
    for update
      ;
