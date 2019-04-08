@@ -4,7 +4,8 @@ create table wlpc (
 code varchar2(255)
 )
 
-select * from wlpc
+select * from wlpc for update ;
+truncate table wlpc
 
 select pk_accountingbook from org_accountingbook where code = '80501-XXJC' --1001B1100000000141DM
 

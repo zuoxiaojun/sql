@@ -15,7 +15,7 @@ select costmode, batchcost
    and pk_material in
        (select pk_material
           from bd_material
-         where code in (select code from wlpc))
+         where code in (select code from wlpc));
          
          
  update bd_materialcostmod

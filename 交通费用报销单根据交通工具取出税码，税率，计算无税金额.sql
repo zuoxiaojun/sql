@@ -15,6 +15,7 @@ name_sm varchar2(200)
 
 --defitem21->getColValue(bd_taxrate, taxrate, pk_taxcode,defitem20 );
 select * from  jtbx_sm for update 
+truncate table jtbx_sm
 
 /*
 
@@ -36,15 +37,16 @@ insert into jtbx_sm
    where pk_defdoclist =
          (select pk_defdoclist from bd_defdoclist where code = 'JTGJ001')
 
-select  code , pk_taxcode  from bd_taxcode where code like '%CN%'
+select code, pk_taxcode from bd_taxcode where code in ('CN23', 'CN24')
 
 
 税码    	defitem20
 税率      defitem21
 不含税额 	defitem22
 税额     	defitem23
-7	CN22	1001D110000000GF2S2K
-9	CN16	1001D110000000A8KX79
+1	CN23	1001D110000000GIM1G0
+2	CN24	1001D110000000GIM1GQ
+
 
 
 /*
