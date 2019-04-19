@@ -11,6 +11,7 @@ select PK_BILLTEMPLET, BILL_TEMPLETCAPTION, PK_BILLTYPECODE
  where bill_templetcaption like '%差旅费报销%'--1001A110000000004CEJ
 
 select ITEMKEY 字段名称,
+       DEFAULTSHOWNAME,
        loadformula 显示公式,
        editformula 编辑公式,
        validateformula 验证公式

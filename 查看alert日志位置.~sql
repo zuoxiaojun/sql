@@ -1,0 +1,5 @@
+
+--查看alert日志位置
+select * from v$diag_info where name ='Diag Alert';
+select * from v$diag_info where name = 'Diag Trace';
+select * from v$diag_info;

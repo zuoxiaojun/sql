@@ -8,14 +8,14 @@ select * from pub_billtemplet_b where pk_billtemplet='1001Z71000000000QJAL'*/
 
 select PK_BILLTEMPLET, BILL_TEMPLETCAPTION, PK_BILLTYPECODE
   from pub_billtemplet
- where bill_templetcaption like '%差旅费报销%'--1001A110000000004CEJ
+ where bill_templetcaption like '%通用费用%' --1001Z31000000000DDNW
 
 select ITEMKEY 字段名称,
-       DEFAULTSHOWNAME,
+       DEFAULTSHOWNAME 显示名称,
        loadformula 显示公式,
        editformula 编辑公式,
        validateformula 验证公式
   from pub_billtemplet_b
- where pk_billtemplet = '1001A110000000004CEJ'
+ where pk_billtemplet = '1001B110000000011QED'
 
 select * from pub_billtemplet_b where pk_billtemplet = '1001A110000000004CEJ'
