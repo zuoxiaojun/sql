@@ -7,7 +7,7 @@ select billno, sum(money_de),sum( local_money_de)
          where pk_apply in
                (select pk_apply
                   from cmp_apply
-                 where vbillno = 'SS19033413'
+                 where vbillno = 'SS19023350'
                    and dr = '0'
                    and pk_acceptorg = (select pk_financeorg
                                          from org_financeorg

@@ -7,7 +7,7 @@ select debitamount, --原币借方金额
        localdebitamount, --组织本币借方金额  
        localcreditamount --组织本币贷方金额 
   from gl_detail
- where explanation = '预提1月份美东仓库送货费'
-   and detailindex = 8
---and localcreditamount =119.12
+ where explanation = '预提1月份美西仓储费'
+   and detailindex = 2
+   --and creditamount = 4413.7
    for update
