@@ -1,0 +1,3 @@
+
+--库存流水创建索引  vbillcode
+create index in_ic_flow_his on ic_flowaccount_his(vbillcode)
