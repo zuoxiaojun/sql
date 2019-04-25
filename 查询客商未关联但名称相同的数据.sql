@@ -6,17 +6,18 @@ select name, a
  where a = 2
 
 
+
 select pk_cust_sup, code, name
   from bd_cust_supplier
- where name = 'GINO Technology Co., Ltd'; --客商信息
+ where name = '国网安徽省电力有限公司六安供电公司'; --客商信息
 
 select pk_supplier, code, name, iscustomer, corcustomer
   from bd_supplier
- where name = 'GINO Technology Co., Ltd'; --供应商基本信息  --1001D1100000000TS3CM
+ where name = '国网安徽省电力有限公司六安供电公司'; --供应商基本信息  --1001D1100000000TS3CM
 
 select pk_customer, code, name，pk_supplier
   from bd_customer
- where name = 'GINO Technology Co., Ltd'; --客户基本信息  --1001D110000000CH03KN
+ where name = '国网安徽省电力有限公司六安供电公司'; --客户基本信息  --1001D110000000CH03KN
         
         
         
