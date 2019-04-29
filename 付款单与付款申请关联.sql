@@ -9,9 +9,10 @@
         TOP_TERMCH,
         local_money_de
    from ap_payitem
-  where billno = '80100FK19030075'
-    and dr = 0
---1	GCL\XXJC-CG(B)-2019-0516号	1001D110000000FW9IIJ	36D1	1001D110000000FW9IIK	1001B110000000016MJ6	500000.00000000
+  where billno = '80100FK19040067'
+    and dr = 0 
+--31	GCL\XXJC-CG(B)-2019-0541号	1001D110000000GG23NC	36D1	1001D110000000GG23ND	1001D1100000000JTHWK	121115.22000000
+
 
 
 
@@ -23,7 +24,7 @@ select CONTRACTNO,
        local_money_de, --构成关联的字段
        dr
   from ap_payitem
- where billno = '80100FK19040042'
+ where billno = '80100FK19040122'
    and dr = 0
    for update
      ;

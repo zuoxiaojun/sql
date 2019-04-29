@@ -13,9 +13,9 @@ select pk_apply,
        unpaysum, --未付金额合计                   
        busistatus --1=待提交，2=待审批，3=待生成，4=部分生成，5=已生成，-1=自由态， 
   from cmp_apply
- where vbillno = 'SS19033413'
-   and pk_apply = '1001D110000000GBI90W'
-   for update --1001D110000000GBI90W
+ where vbillno = 'SS19023350'
+   --and pk_apply = '1001D110000000DHVOUY'
+   for update --1001D110000000FW9IIJ
 ;
 
 select paymny, --累计付款金额
@@ -35,5 +35,5 @@ select paymny, --累计付款金额
        unpaymny,
        busistatus
   from cmp_apply_b
- where pk_apply = '1001D110000000GBI90W'
+ where pk_apply = '1001D110000000FW9IIJ'
    for update
