@@ -1,0 +1,14 @@
+/*
+销售发票参照不到销售订单
+业务流字段错误  CBIZTYPEID
+
+*/
+
+select CBIZTYPEID
+  from so_saleorder
+ where vbillcode in ('80501XD20190430001', '80501XD20190425001')
+for update 
+  
+select businame, busicode, pk_busitype
+  from bd_busitype
+ where pk_busitype = '1001D11000000010KYGT'
