@@ -1,3 +1,2 @@
-select *
-  from gcl_ehr_cux_hr2fin_tmgf
+select * from gcl_ehr_cux_hr2fin_tmgf
  where vbillno = '0000124755' --≥ˆ≤Ó…Í«Î
