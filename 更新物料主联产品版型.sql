@@ -15,7 +15,8 @@ zjname varchar2(100)
 )
 
 select  * from  zlbx 
---truncate table zlbx
+
+truncate table zlbx
 
 --更新def2为主联版型
 

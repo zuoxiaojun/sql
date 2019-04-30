@@ -24,22 +24,23 @@ select  * from  zlbx
        (select b.zlpk from zlbx b where a.code = b.code)
  where exists (select 1 from zlbx b where a.code = b.code);*/
  
- merge into bd_material a
- using zlbx b
- on a.code = b.code
- when matched then
-   update set a.def2 = b.zlpk
-
+ 
 /*update bd_material_v a
    set a.def2 =
        (select b.zlpk from zlbx b where a.code = b.code)
  where exists (select 1 from zlbx b where a.code = b.code)*/
  
- merge into bd_material_v a
- using zlbx b
- on a.code = b.code
- when matched then
-   update set a.def2 = b.zlpk
+merge into bd_material a
+using zlbx b
+on (a.code = b.code)
+when matched then
+  update set a.def2 = b.zlpk;
+  
+merge into bd_material_v a
+using zlbx b
+on (a.code = b.code)
+when matched then
+  update set a.def2 = b.zlpk
 
 --更新def1为产品组件版型
 
@@ -48,21 +49,22 @@ select  * from  zlbx
        (select b.zjpk from zlbx b where a.code = b.code)
  where exists (select 1 from zlbx b where a.code = b.code);*/
  
- merge into bd_material a
- using zlbx b
- on a.code = b.code
- when matched then
-   update set a.def1 = b.zjpk
-   
-/*
+ /*
 update bd_material_v a
    set a.def1 =
        (select b.zjpk from zlbx b where a.code = b.code)
  where exists (select 1 from zlbx b where a.code = b.code)
 */
+ 
+ merge into bd_material a
+ using zlbx b
+ on (a.code = b.code)
+ when matched then
+   update set a.def1 = b.zjpk;
+ 
  merge into bd_material_v a
  using zlbx b
- on a.code = b.code
+ on (a.code = b.code)
  when matched then
    update set a.def1 = b.zjpk
 
