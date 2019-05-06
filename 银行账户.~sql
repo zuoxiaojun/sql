@@ -10,7 +10,8 @@ select pk_bankaccbas,
   from bd_bankaccbas
  where accnum = '3050020010120100247366'  and enablestate='2' for update
 
-select code, name, accnum, accname,fronzenstate 
+select code, name, accnum, accname,fronzenstate ,  pk_currtype ,dr
   from bd_bankaccsub
  where  pk_bankaccsub  = '1001D1100000000FBEHN'
    for update
+

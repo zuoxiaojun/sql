@@ -22,6 +22,5 @@ select crowno,
   for update 
 
 
-select * from org_financeorg_v where pk_vid = '0001B11000000000T16F'
 
 

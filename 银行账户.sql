@@ -8,10 +8,10 @@ select pk_bankaccbas,
        dataoriginflag,
        enablestate
   from bd_bankaccbas
- where accnum = '3050020010120100247366'  and enablestate='2' for update
+ where accnum = '37090181000127540'  and enablestate='2' for update
 
-select code, name, accnum, accname,fronzenstate ,  pk_currtype ,dr
+select code, name, accnum, accname, fronzenstate, pk_currtype, dr
   from bd_bankaccsub
- where  pk_bankaccsub  = '1001D1100000000FBEHN'
+ where pk_bankaccbas = '1001D110000000DA210I'
    for update
 
