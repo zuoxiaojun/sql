@@ -75,7 +75,7 @@ update er_busitem a
            
    --创建存储过程，后台调度作业，定时执行  
  
-   create or replace procedure update_er_busitem_tax
+ create or replace procedure update_er_busitem_tax
  --更新报销单税码pk，按照税率匹配
   is
  begin
@@ -91,7 +91,7 @@ update er_busitem a
               and defitem24 = '~'
               and pk_jkbx in
                   (select pk_jkbx from er_bxzb where djlxbm = '2641')
-              and ts > '2018-01-01 00:00:00');
+              and ts > '2019-01-01 00:00:00');
  
    --剩余报销单
    update er_busitem a
