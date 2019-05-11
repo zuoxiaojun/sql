@@ -7,7 +7,7 @@ select debitamount, --原币借方金额
        localdebitamount, --组织本币借方金额  
        localcreditamount --组织本币贷方金额 
   from gl_detail
- where explanation = '调整1-9#'
-   and detailindex = 2
-   --and groupdebitamount = 3240.12
+ where explanation = '代扣员工应缴社保'
+   and detailindex = 181
+   and localcreditamount = 534600.91
    for update
