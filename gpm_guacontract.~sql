@@ -1,0 +1,37 @@
+select  pk_guacontract  from  gpm_guacontract where dr=0 and contractno='民生信托应收账款质押' --1001A41000000001TO32
+
+select distinct (dr) from gpm_guacontract
+
+
+select a.pk_org,
+       a.guarantor,
+       a.vdef8,
+       a.contractno,
+       a.guastartdate,
+       a.guaenddate,
+       a.busistatus,
+       a.pk_guacurrtype,
+       guaamount,
+       a.guaamountdivcapital,
+       a.gualcamount,
+       a.warliability,
+       a.guatype,
+       a.dr adr,
+       b.dr bdr,
+       b.pk_guaproperty,
+       b.p_unit,
+       b.p_count,
+       b.usingamount
+  from gpm_guacontract a
+  left join gpm_guaproperty b
+    on a.contractno = b.PLEDGENO
+ where a.dr = 0
+
+
+select distinct(dr) from gpm_guaproperty
+
+
+select *  from gpm_guaproperty where PLEDGENO='民生信托应收账款质押'
+
+select distinct(dr) from gpm_guaproperty
+
