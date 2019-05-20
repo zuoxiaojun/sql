@@ -7,10 +7,11 @@
         TOP_BILLTYPE,
         TOP_ITEMID
    from ap_payitem
-  where billno = '83300FK19040014'
+  where billno = '80100FK19050047'
     and dr = 0 
     
---1	vodafone 2018 December	1001D110000000H217Y2	36D1	1001D110000000H217Y3	~	7.53000000
+--1	GCL\XXJC-CG(B)-2019-0022号	1001D110000000H1ZQ87	36D1	1001D110000000H1ZQ88
+
 
 select CONTRACTNO,
        TOP_BILLID,
@@ -19,7 +20,7 @@ select CONTRACTNO,
        --构成关联的字段
        dr
   from ap_payitem
- where billno = '83300FK19040013'
+ where billno = '80100FK19050046'
    and dr = 0
    for update
      ;
