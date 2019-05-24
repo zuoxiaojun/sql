@@ -1,0 +1,27 @@
+select vdef20
+  from dm_delivbill
+ where vbillcode in ('80100YS20190429009', '80100YS20190429011') for update ;
+
+select code,name , pk_dept  from org_dept where code='8010205'  --1001D11000000052KQGW
+
+select vdef20 from dm_apinvoice where vbillcode ='80100WF201905200093'
+
+
+--逻辑删除销售订单主表
+update so_saleorder set dr=1 where vbillcode='SO30AK190521012';
+
+--逻辑删除销售订单子表
+update so_saleorder_b
+   set dr = 1
+ where csaleorderid in (select csaleorderid
+                         from so_saleorder
+                        where vbillcode = 'SO30AK190521012');
+--逻辑删除销售订单执行表
+update so_saleorder_exe
+   set dr = 1where csaleorderbid in
+            (select csaleorderbid
+                      from so_saleorder_b
+                     where csaleorderid in
+                           (select csaleorderid
+                              from so_saleorder
+                             where vbillcode = 'SO30AK190521012'));

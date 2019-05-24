@@ -1,0 +1,9 @@
+--修改运输单部门
+
+select vdef20
+  from dm_delivbill
+ where vbillcode in ('81200YS20190428045','81200YS20190430050','81200YS20190430051','81200YS20190430052') for update ;
+
+select code,name , pk_dept  from org_dept where code='8120115'  --1001D110000000F1TE10
+
+select vdef20 from dm_apinvoice where vbillcode ='80100WF201905200093'
