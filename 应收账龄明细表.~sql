@@ -23,4 +23,6 @@ select *
                             and blatest = 'Y')
 for update 
 
-
+select pk_org, vbillcode, pk_financeorg 
+  from ct_sale
+ where pk_ct_sale = '1001D110000000CK0YY0' --0001B11000000003HGWR

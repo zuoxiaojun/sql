@@ -22,18 +22,9 @@ vdef4  varchar(101)
 
 select * from htxz
 
-truncate table htxz
-
 update ct_sale a
    set a.vdef4 =
        (select b.vdef4 from htxz b where a.vbillcode = b.vbillcode)
  where exists (select * from htxz b where a.vbillcode = b.vbillcode)
  and blatest ='Y'
 
-
-
-select vdef4
-  from ct_sale
- where vbillcode = 'GCL/XXJC-XS-2018-0057'  --1001D1100000009IN33B
-   and blatest = 'Y'
-   for update
