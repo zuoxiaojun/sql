@@ -1,10 +1,10 @@
 --修改付款申请单单据状态
-select pk_apply, vbillstatus, busistatus
+select pk_apply, vbillstatus, busistatus,dr
   from cmp_apply
- where vbillno = 'SS18011938' for update 
+ where vbillno = 'SS18073517' for update 
 
 
 select busistatus, vbillstatus
   from cmp_apply_b
- where pk_apply = '1001D1100000008DA86C'
+ where pk_apply = '1001D110000000GNBTC9'
    for update

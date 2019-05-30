@@ -49,4 +49,4 @@ where fk_detail in
 (select t.pk_detail
 from gl_detail t
 where t.pk_voucher = '10028K10000000036YXM');
-
+XM');

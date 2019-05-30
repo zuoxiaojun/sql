@@ -10,5 +10,5 @@ select *
 delete   from bd_userdefitem 
  where pk_userdefrule = (select pk_userdefrule
                            from bd_userdefrule
-                          where code = 'erm_264X_B')
-   and propindex = 32;   --删除属性定义
+                          where code = '4804')
+   and propindex = 20;   --删除属性定义
