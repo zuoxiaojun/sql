@@ -2,7 +2,9 @@
 select pk_material, code, name
   from bd_material_v
  where pk_marbasclass in
-       (select pk_marbasclass from bd_marbasclass where name = '成本对象类')
+       (select pk_marbasclass
+          from bd_marbasclass
+         where name in ('成本对象类', '鑫宇成本对象（品种）'))
 
 --创建版型更新表
 create table zlbx (
