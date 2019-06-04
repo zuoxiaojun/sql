@@ -7,14 +7,14 @@ select distinct (pk_accasoa)
  where pk_accasoa = '0001Z01000ACCOUNT002'
 
 
-select *  from gl_detail where debitamount ='1067685.00'  --银行存款 1001A110000000000FD6
+select *  from gl_detail where debitamount ='1067685.00'  --閾惰瀛樻 1001A110000000000FD6
 
 select assid
   from gl_detail
- where pk_accasoa = '1001A110000000000FD6' --会计科目  1002  银行存款
+ where pk_accasoa = '1001A110000000000FD6' --浼氳绉戠洰  1002  閾惰瀛樻
    and pk_accountingbook = (select pk_accountingbook
                               from org_accountingbook
-                             where code = '801-XXJC') --财务核算账簿编码
+                             where code = '801-XXJC') --璐㈠姟鏍哥畻璐︾翱缂栫爜
    and YEARV = '2017'
    and dr = 0
 
@@ -22,11 +22,11 @@ select *
   from gl_docfree1
  where assid  in (select assid
                            from gl_detail
-                          where pk_accasoa = '1001A110000000000FD6' --会计科目  1002  银行存款
+                          where pk_accasoa = '1001A110000000000FD6' --浼氳绉戠洰  1002  閾惰瀛樻
                             and pk_accountingbook =
                                 (select pk_accountingbook
                                    from org_accountingbook
-                                  where code = '801-XXJC') --财务核算账簿编码
+                                  where code = '801-XXJC') --璐㈠姟鏍哥畻璐︾翱缂栫爜
                             and YEARV = '2017'
                             and dr = 0)
                             
