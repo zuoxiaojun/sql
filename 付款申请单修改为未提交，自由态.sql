@@ -3,11 +3,11 @@ select busistatus£¬vbillstatus£¬modifier, modifiedtime   from cmp_apply where vb
 
 
 
-select busistatus, vbillstatus,pk_apply 
+select busistatus, vbillstatus, pk_apply
   from cmp_apply
  where vbillno = 'SS19062917'
    and pk_org in (select pk_org from org_orgs where code = '802') --±íÍ·
-
+   and dr = 0
 
 
 select busistatus, vbillstatus

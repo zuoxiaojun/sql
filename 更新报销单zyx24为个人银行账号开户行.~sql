@@ -30,5 +30,5 @@ update er_bxzb
                          where pk_bankaccsub =
                                (select skyhzh
                                   from er_bxzb
-                                 where djbh = '80800BX19050306'))))
- where djbh = '80800BX19050306'
+                                 where djbh = '80501BX19050207'))))
+ where djbh = '80501BX19050207'
