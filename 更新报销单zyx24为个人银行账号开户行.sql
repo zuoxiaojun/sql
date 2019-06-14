@@ -14,7 +14,8 @@ select name
                           where pk_bankaccsub =
                                 (select skyhzh
                                    from er_bxzb
-                                  where djbh = '80501BX19050207')))
+                                  where djbh = '83400CL19060017')
+                            and accountproperty = 1))
 
 select djlxbm, djbh, zyx24, zyx23, skyhzh
   from er_bxzb
@@ -34,5 +35,6 @@ update er_bxzb
                          where pk_bankaccsub =
                                (select skyhzh
                                   from er_bxzb
-                                 where djbh = '82600BX19060001'))))
- where djbh = '82600BX19060001'
+                                 where djbh = '83400CL19060017')
+                                 and accountproperty=1)))
+ where djbh = '83400CL19060017'

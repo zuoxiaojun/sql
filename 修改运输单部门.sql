@@ -3,9 +3,9 @@
 --运输单
 select vdef20
   from dm_delivbill
- where vbillcode in ('81500YS20190423029') for update ;
+ where vbillcode in ('81600YS20190430048') for update ;
 
-select code,name , pk_dept  from org_dept where name='东南亚'  --0001D110000000995S9I
+select code,name , pk_dept  from org_dept where name='计划保障-计划'  --1001D1100000000MT85Q
 
 --应付运费发票
 select vdef20
