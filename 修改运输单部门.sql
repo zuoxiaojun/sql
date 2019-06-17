@@ -10,7 +10,7 @@ select code,name , pk_dept  from org_dept where name='计划保障-计划'  --1001D110
 --应付运费发票
 select vdef20
   from dm_apinvoice
- where vbillcode = '81500WF201905220107'
+ where vbillcode = '81600WF201904120046'
    for update
 
 

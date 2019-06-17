@@ -15,11 +15,11 @@ select name
                                 (select skyhzh
                                    from er_bxzb
                                   where djbh = '83400CL19060017')
-                            and accountproperty = 1))
+                            and accountproperty = 1))  ;
 
-select djlxbm, djbh, zyx24, zyx23, skyhzh
+select rownum, djlxbm, djbh, zyx24, zyx23, skyhzh
   from er_bxzb
- where zyx24 like '%zyx24%'
+ where zyx24 like '%zyx24%';
 
 --更新报销单zyx24为个人银行账号开户行
 update er_bxzb
@@ -35,6 +35,6 @@ update er_bxzb
                          where pk_bankaccsub =
                                (select skyhzh
                                   from er_bxzb
-                                 where djbh = '83400CL19060017')
+                                 where djbh = '80800CL19060078')
                                  and accountproperty=1)))
- where djbh = '83400CL19060017'
+ where djbh = '80800CL19060078'

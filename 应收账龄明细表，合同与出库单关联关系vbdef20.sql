@@ -4,7 +4,7 @@ select vbdef20,norigtaxmny ,ntaxmny
  where cgeneralhid =
        (select cgeneralhid
           from ic_saleout_h
-         where vbillcode = '81300XC20180407070')  --10818627.125 541476.00000000
+         where vbillcode = '81300XC20180407070')  --11360103.125 541476.00000000
 for update 
 
 
