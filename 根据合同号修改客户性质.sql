@@ -37,3 +37,31 @@ select vdef4
  where vbillcode = 'GCL/XXJC-XS-2018-0057'  --1001D1100000009IN33B
    and blatest = 'Y'
    for update
+
+
+--更新合同客户性质为双经销  1001D1100000009IN33H
+
+update ct_sale
+   set vdef4 = '1001D1100000009IN33H'
+ where vbillcode in ('GCL/DSWF-QT-20180090号',
+                     'GCL/DSWF-QT-20180104号',
+                     'GCL/DSWF-QT-20190025号',
+                     'GCL/ZJGJC-QT-20180068',
+                     'GCL/ZJGJC-QT-20180095',
+                     'GCL/ZJGJC-XSSW-20180019',
+                     'CHYN-GCL201805-1')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

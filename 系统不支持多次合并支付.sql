@@ -9,8 +9,10 @@ SELECT paystatus,pk_settlement , serial   FROM  cmp_payment t where t.pk_settlem
 delete from cmp_payment t where t.pk_settlement='0001D110000000993252';
 commit; 
 
+--¥¶¿Ì”Ôæ‰
+
 delete from cmp_payment
  where pk_settlement =
        (select pk_settlement
           from cmp_settlement
-         where billcode = '80800CL19050138');
+         where billcode = '80501CL19060215');

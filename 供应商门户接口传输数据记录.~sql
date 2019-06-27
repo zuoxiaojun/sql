@@ -39,7 +39,8 @@ begin
 
 select * from user_jobs;
 
-select * from bd_supplier where pk_supplier='1001D110000000HDB9AS'
 
+select * from  bd_supplier where name='供应商门户测试'  --1001D110000000HIP1OR
 
+select * from bd_defdoc where  pk_defdoc ='1001D110000000HIP1OS'
 

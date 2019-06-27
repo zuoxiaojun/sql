@@ -2,7 +2,7 @@
 select a.file_id, a.pk_bill, a.ts, b.code, b.name, b.creator, b.pk_supplier
   from xx_idcontrast a, bd_supplier b
  where a.pk_bill = b.pk_supplier
-   and a.ts > '2019-05-17 00:55:44';
+   and a.ts > '2019-06-26 00:00:00';
 
 --修改供应商创建人为"门户"
 update bd_supplier
@@ -40,5 +40,7 @@ begin
 select * from user_jobs;
 
 
+select * from  bd_supplier where name='供应商门户测试'  --1001D110000000HIP1OR
 
+select * from bd_defdoc where  pk_defdoc ='1001D110000000HIP1OS'
 
