@@ -2,7 +2,7 @@
 --匹配报销单表头职级档案数据
 select djbh,jkbxr,zyx30 from er_bxzb  where zyx30 = '~' order by ts desc
 
-select * from EHR_SYNONYMS_CUX_HR2ZJ_TM where psncode='194428'
+select * from EHR_SYNONYMS_CUX_HR2ZJ_TM where psncode='111288' for update
 
 --查询出人员职级数据
 create or replace view v_info_ryzj as 

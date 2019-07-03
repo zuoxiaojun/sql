@@ -4,7 +4,7 @@ select ctaxcodeid
   from so_saleorder_b
  where csaleorderid = (select csaleorderid
                          from so_saleorder
-                        where vbillcode = '82500XD20190419001'
+                        where vbillcode = '82600XD20190702007'
                           and dr = 0)
       
    and dr = 0
@@ -13,4 +13,4 @@ select ctaxcodeid
 
 select pk_taxcode, code, description
   from bd_taxcode
- where code = 'CN03' --1001D110000000112IHU
+ where code = 'CN10' --1001D110000000112IHU

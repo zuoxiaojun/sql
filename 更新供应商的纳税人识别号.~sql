@@ -1,0 +1,31 @@
+--更新供应商的纳税人识别号
+
+--创建供应商门户表
+
+create table gysmh (
+name varchar2(255),
+taxpayerid varchar(20)
+)
+
+select * from gysmh ;
+
+
+--更新供应商
+merge into bd_supplier a
+using gysmh b
+on (a.name = b.name)
+when matched then
+  update set a.taxpayerid = b.taxpayerid
+
+--更新客商信息
+merge into bd_cust_supplier a
+using gysmh b
+on (a.name = b.name)
+when matched then
+  update set a.taxpayerid = b.taxpayerid
+
+--更新为门户合格
+
+update bd_supplier
+   set def1 = '1001D110000000HIP1OR'
+ where name in (select name from gysmh)

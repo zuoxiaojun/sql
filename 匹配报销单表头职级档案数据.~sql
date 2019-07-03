@@ -22,3 +22,17 @@ when matched then
   update set a.zyx30 = b.zj where a.zyx30 = '~'
 
 
+--创建存储过程
+
+create or replace procedure update_zj is
+begin
+  merge into er_bxzb a
+  using v_info_ryzj b
+  on (a.jkbxr = b.pk_psndoc)
+  when matched then
+    update set a.zyx30 = b.zj where a.zyx30 = '~';
+  commit;
+end;
+
+
+select * from user_jobs

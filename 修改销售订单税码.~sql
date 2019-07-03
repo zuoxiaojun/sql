@@ -11,4 +11,6 @@ select ctaxcodeid
    for update --1001Z01000000003W0X1
 
 
-select   pk_taxcode ,code,description  from bd_taxcode where code ='CN03'  --1001D110000000112IHU
+select pk_taxcode, code, description
+  from bd_taxcode
+ where code = 'CN03' --1001D110000000112IHU

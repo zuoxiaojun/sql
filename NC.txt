@@ -1,0 +1,15 @@
+费用承担人 部门   职级
+
+
+zyx5->getcolvalue(v_info_ryzj ,ZJ ,PK_PSNDOC ,zyx6 );
+zyx7->getcolvalue2( bd_psnjob,pk_dept  ,pk_psndoc ,zyx6,ismainjob,"Y" )
+
+$Error->iif(deptid<>zyx7,"费用承担人部门与报销人部门不一致，请检查","")
+
+5	费用承担人职级	字符串
+6	费用承担人姓名	人员基本信息
+7	费用承担人部门	组织_部门
+
+
+
+$Error->iif(getcolvalue(CRM_OPPORTUNITY ,opportunityid__c ,opportunityid__c ,vdef17 )==null ,"CRM编号不存在","")
