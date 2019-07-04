@@ -7,7 +7,7 @@ name varchar2(255),
 taxpayerid varchar(20)
 )
 
-select * from gysmh ;
+select *  from gysmh
 
 --更新供应商
 merge into bd_supplier a

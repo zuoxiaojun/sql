@@ -9,7 +9,6 @@ taxpayerid varchar(20)
 
 select * from gysmh ;
 
-
 --更新供应商
 merge into bd_supplier a
 using gysmh b
