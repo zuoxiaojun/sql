@@ -15,3 +15,8 @@ select * from dzbp
 update ia_detailledger
    set nmny = round(nmny, 2)
  where vbillcode in (select vbillcode from dzbp)
+
+
+select nmny
+  from ia_detailledger
+ where vbillcode in (select vbillcode from dzbp)
