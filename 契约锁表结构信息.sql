@@ -7,8 +7,8 @@ select *from DOCUMENT a left join DOCUMENT_PARAM b on a.id = b.documentId;
 	
 --合同与合同文档关联信息
 
-	select a.id contractId,a.subject,a.sn ,b.businessId,b.id documentId ,b.title from CONTRACT a left join DOCUMENT b on a.id=b.businessId
-	where a.id='2599462615030936284'
+	select a.id contractId,a.subject,a.sn ,a.status,businessId,b.id documentId ,b.title from CONTRACT a left join DOCUMENT b on a.id=b.businessId
+	where a.id='2601699711495307300'
 
 
 
@@ -23,4 +23,18 @@ select a.id gsid,a.name gsmc,b.id yzid,b.name yzname,b.status from COMPANY a lef
 --系统配置信息
 SELECT * FROM SYS_CONFIG
 
+
+-- 合同与签署方信息关联表
+select
+	a.id,
+	a.`subject`,
+	a.sn,
+	a.`status`,
+	b.serialNo,
+	b.tenantName,
+	b.receiverName,
+	b.`status` qszt 
+from
+	contract a
+	left join signatory b on a.id = b.contractId
 
