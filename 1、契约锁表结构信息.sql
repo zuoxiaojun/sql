@@ -38,3 +38,9 @@ from
 	contract a
 	left join signatory b on a.id = b.contractId
 
+-- 查看已实名认证的用户
+select * from user_auth where authStep='PASSED';
+
+
+
+
