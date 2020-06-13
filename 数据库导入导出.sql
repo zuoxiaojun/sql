@@ -13,7 +13,7 @@ select * from dba_directories;
 grant read,write on directory expdp_dir to NC20190521;
 
 --构造导入语句（要在cmd里执行）
-impdp NC20190521/1 directory=expdp_dir dumpfile=AODE20190521.dmp logfile=AODE20190521.log REMAP_SCHEMA=NC65:NC20190521
+impdp NC20190521/1 directory=expdp_dir dumpfile=20190521.dmp logfile=AODE20190521.log REMAP_SCHEMA=NC65:NC20190521
 
 
 /*oracle数据库导出*/

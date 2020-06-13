@@ -26,7 +26,7 @@ select * from dba_directories;
 grant read,write on directory expdp_dir to backup_user;
 
 --3、构造导出语句（要在cmd里执行）
-expdp backup_user/backup_user directory=expdp_dir dumpfile=data_name.dmp logfile=logname.log
+expdp backup_user/backup_user directory=expdp_dir dumpfile=data_name.dmp schemas=backup_user logfile=logname.log
 
 
 
